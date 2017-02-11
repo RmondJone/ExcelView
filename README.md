@@ -3,7 +3,7 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 
 ##效果展示
 
-![image](https://github.com/RmondJone/ExcelView/blob/master/ExcelViewDemo/GIF.gif)
+![image](https://github.com/RmondJone/ExcelView/blob/master/ExcelViewDemo/show.gif)
 
 ##更新日志
 
@@ -11,11 +11,11 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 
 ##API使用说明
 
-```objective-c 
+```objective-c
     self.leftTableDataArray=(NSMutableArray *)@[@"塔城",@"哈密",@"和田",@"阿勒泰",@"克州"];
     self.rightTableHeadArray=(NSMutableArray *)@[@"当日收入（万）",@"同比",@"环比",@"当月收入（万）",@"同比",@"环比",@"当年收入（万）",@"同比",@"环比"];
     self.excelDataArray=(NSMutableArray *)@[@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"]];
-    
+
     //代码方式添加
     ExcelView *excelView=[[ExcelView alloc]initWithFrame:CGRectMake(0, 280, UIScreenWidth, 270)];
     excelView.topTableHeadDatas=self.rightTableHeadArray;
@@ -27,8 +27,8 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
     excelView.columnTitlte=@"地区";
     [excelView show];
     [self.view addSubview:excelView];
-    
-    
+
+
     //xib布局添加方式
     self.mExcelView.topTableHeadDatas=self.rightTableHeadArray;
     self.mExcelView.leftTabHeadDatas=self.leftTableDataArray;
@@ -42,7 +42,7 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 ```
 ##目前支持可自定义属性
 
-```objective-c 
+```objective-c
 /**
  是否锁定第一列
  */
@@ -84,6 +84,3 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 * 联系方式：QQ(2318560278）
 * 技术交流群：QQ(264587303)
 * Demo作者：郭翰林
-    
-    
-    
