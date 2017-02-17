@@ -17,6 +17,7 @@
 		CA3146C21E4DAF0800EF4499 /* ExcelView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3146BC1E4DAF0800EF4499 /* ExcelView.m */; };
 		CA3146C31E4DAF0800EF4499 /* ExcelViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3146BE1E4DAF0800EF4499 /* ExcelViewCell.m */; };
 		CA3146C41E4DAF0800EF4499 /* ExcelViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA3146BF1E4DAF0800EF4499 /* ExcelViewCell.xib */; };
+		CA571C0C1E5451D900D1253B /* UILabel+FitWitdhAndHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = CA571C0B1E5451D900D1253B /* UILabel+FitWitdhAndHeight.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,8 @@
 		CA3146BD1E4DAF0800EF4499 /* ExcelViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcelViewCell.h; sourceTree = "<group>"; };
 		CA3146BE1E4DAF0800EF4499 /* ExcelViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcelViewCell.m; sourceTree = "<group>"; };
 		CA3146BF1E4DAF0800EF4499 /* ExcelViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcelViewCell.xib; sourceTree = "<group>"; };
+		CA571C0A1E5451D900D1253B /* UILabel+FitWitdhAndHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FitWitdhAndHeight.h"; sourceTree = "<group>"; };
+		CA571C0B1E5451D900D1253B /* UILabel+FitWitdhAndHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FitWitdhAndHeight.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 				CA3146BD1E4DAF0800EF4499 /* ExcelViewCell.h */,
 				CA3146BE1E4DAF0800EF4499 /* ExcelViewCell.m */,
 				CA3146BF1E4DAF0800EF4499 /* ExcelViewCell.xib */,
+				CA571C0A1E5451D900D1253B /* UILabel+FitWitdhAndHeight.h */,
+				CA571C0B1E5451D900D1253B /* UILabel+FitWitdhAndHeight.m */,
 			);
 			path = ExcelView;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 				CA3146C01E4DAF0800EF4499 /* ExcelLockCell.m in Sources */,
 				CA3146A41E4DAB2700EF4499 /* ViewController.m in Sources */,
 				CA3146C31E4DAF0800EF4499 /* ExcelViewCell.m in Sources */,
+				CA571C0C1E5451D900D1253B /* UILabel+FitWitdhAndHeight.m in Sources */,
 				CA3146C21E4DAF0800EF4499 /* ExcelView.m in Sources */,
 				CA3146A11E4DAB2700EF4499 /* AppDelegate.m in Sources */,
 				CA31469E1E4DAB2700EF4499 /* main.m in Sources */,

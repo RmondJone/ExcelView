@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UILabel+FitWitdhAndHeight.h"
 @interface ExcelView : UIView<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 /**
  是否锁定第一列
@@ -38,6 +39,15 @@
  */
 @property(nonatomic,retain) NSMutableArray *tableDatas;
 
+/**
+ 设置字体
+ */
+@property(nonatomic,retain) UIFont *textFont;
+
+/**
+ 第一行背景颜色
+ */
+@property(nonatomic,retain) UIColor *fristRowBackGround;
 /**
  显示，必须调用该方法，视图才会展现
  */

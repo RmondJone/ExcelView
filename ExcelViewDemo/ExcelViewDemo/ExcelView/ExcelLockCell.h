@@ -13,5 +13,6 @@
 @interface ExcelLockCell : UITableViewCell
 @property (retain, nonatomic) IBOutlet UIView *lockView;
 @property (retain, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lockViewWidthConstraint;
 
 @end

@@ -41,6 +41,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="lockView" destination="SRP-fC-mNR" id="QYh-UW-7ra"/>
+                <outlet property="lockViewWidthConstraint" destination="w3h-yz-pCH" id="YG3-qx-url"/>
                 <outlet property="scrollView" destination="lPk-4Y-SmF" id="kxg-zU-ReN"/>
             </connections>
         </tableViewCell>
