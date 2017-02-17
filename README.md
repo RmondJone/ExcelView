@@ -8,6 +8,8 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 ##更新日志
 
 * 更新时间2017年02月11日09:48:27  -----ExcelView V1.0.0
+* 更新时间2017年02月17日11:17:14  -----ExcelView V1.0.1 <br>   
+  添加表格宽度自适应,添加自定义第一行背景色属性和设置表格字体属性
 
 ##API使用说明
 
@@ -72,6 +74,16 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
  表格数据（2维数组，不包括第一列和第一行数据，只接收字符串，例：@[@[],@[],....]）
  */
 @property(nonatomic,retain) NSMutableArray *tableDatas;
+
+/**
+ 设置字体
+ */
+@property(nonatomic,retain) UIFont *textFont;
+
+/**
+ 第一行背景颜色
+ */
+@property(nonatomic,retain) UIColor *fristRowBackGround;
 
 /**
  显示，必须调用该方法，视图才会展现
