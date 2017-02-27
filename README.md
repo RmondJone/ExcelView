@@ -4,12 +4,21 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 ##效果展示
 
 ![image](https://github.com/RmondJone/ExcelView/blob/master/ExcelViewDemo/show.gif)
-
+![image](https://github.com/RmondJone/ExcelView/blob/master/ExcelViewDemo/show2.gif)
 ##更新日志
 
 * 更新时间2017年02月11日09:48:27  -----ExcelView V1.0.0
-* 更新时间2017年02月17日11:17:14  -----ExcelView V1.0.1   
+
+* 更新时间2017年02月17日11:17:14  -----ExcelView V1.0.1  
+
   添加表格宽度自适应,添加自定义第一行背景色属性和设置表格字体属性
+
+* 更新时间2017年02月27日15:58:07  -----ExcelView V1.0.2   
+
+  添加表格高度自适应,添加设置单元格最大行宽
+
+
+
 
 ##API使用说明
 
@@ -39,6 +48,7 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
     self.mExcelView.isLockFristRow=YES;
     self.mExcelView.isColumnTitlte=YES;
     self.mExcelView.columnTitlte=@"地区";
+    self.mExcelView.columnMaxWidth=200;
     [self.mExcelView show];
 
 ```
