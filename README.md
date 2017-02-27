@@ -94,7 +94,10 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
  第一行背景颜色
  */
 @property(nonatomic,retain) UIColor *fristRowBackGround;
-
+/**
+ 列最大宽度
+ */
+@property(nonatomic) CGFloat columnMaxWidth;
 /**
  显示，必须调用该方法，视图才会展现
  */
