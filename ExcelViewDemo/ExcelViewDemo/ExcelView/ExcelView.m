@@ -234,14 +234,14 @@
                 cell=(ExcelLockCell *)[[[NSBundle mainBundle]loadNibNamed:@"ExcelLockCell" owner:nil options:nil]lastObject];
             }
             //构造锁定视图
-            UILabel *lockView=[[UILabel alloc]initWithFrame:CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[indexPath.row] floatValue]:cell.frame.size.height)];
+            UILabel *lockView=[[UILabel alloc]initWithFrame:CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
             lockView.text=[self.mYTableDatas objectAtIndex:indexPath.row+1];
             lockView.textAlignment=NSTextAlignmentCenter;
             lockView.textColor=RGB(84, 84, 84);
             lockView.numberOfLines=0;
             lockView.font=self.textFont;
             //更改锁定视图frame
-            cell.lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[indexPath.row] floatValue]:cell.frame.size.height);
+            cell.lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45);
             cell.lockViewWidthConstraint.constant=[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70;
             [cell.lockView addSubview:lockView];
             cell.lockView.layer.borderWidth=0.6;
@@ -250,7 +250,7 @@
             CGFloat x=0;
             int i=1;
             for (NSString *data in [self.mXTableDatas objectAtIndex:indexPath.row]) {
-                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>70?[self.mColumeMaxWidths[i]floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[indexPath.row] floatValue]:cell.frame.size.height)];
+                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>70?[self.mColumeMaxWidths[i]floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
                 UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
                 dataView.text=data;
                 dataView.textColor=RGB(84, 84, 84);
@@ -280,7 +280,7 @@
             CGFloat x=0;
             int i=0;
             for (NSString *data in [self.mXTableDatas objectAtIndex:indexPath.row]) {
-                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0,[self.mColumeMaxWidths[i]floatValue]>70?[self.mColumeMaxWidths[i]floatValue]:70,[self.mRowMaxHeights[indexPath.row] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[indexPath.row] floatValue]:cell.frame.size.height)];
+                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0,[self.mColumeMaxWidths[i]floatValue]>70?[self.mColumeMaxWidths[i]floatValue]:70,[self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
                 UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
                 dataView.text=data;
                 dataView.textColor=RGB(84, 84, 84);
@@ -312,14 +312,14 @@
             }
             if(indexPath.row==0){
                 //构造锁定视图
-                UILabel *lockView=[[UILabel alloc]initWithFrame:CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[indexPath.row] floatValue]:cell.frame.size.height)];
+                UILabel *lockView=[[UILabel alloc]initWithFrame:CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
                 lockView.text=[self.mYTableDatas objectAtIndex:indexPath.row];
                 lockView.textColor=RGB(94, 153, 251);
                 lockView.textAlignment=NSTextAlignmentCenter;
                 lockView.numberOfLines=0;
                 lockView.font=self.textFont;
                 //更改锁定视图frame
-                cell.lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[indexPath.row] floatValue]:cell.frame.size.height);
+                cell.lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45);
                 cell.lockViewWidthConstraint.constant=[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70;
                 [cell.lockView addSubview:lockView];
                 cell.lockView.layer.borderWidth=0.6;
@@ -329,7 +329,7 @@
                 CGFloat x=0;
                 int i=1;
                 for (NSString *data in self.mFristRowDatas) {
-                    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>70?[self.mColumeMaxWidths[i]floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[indexPath.row] floatValue]:cell.frame.size.height)];
+                    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>70?[self.mColumeMaxWidths[i]floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
                     UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
                     dataView.text=data;
                     dataView.textColor=RGB(94, 153, 251);
@@ -352,13 +352,13 @@
                 [self.mScrollViewArray addObject:cell.scrollView];
             }else{
                 //构造锁定视图
-                UILabel *lockView=[[UILabel alloc]initWithFrame:CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[indexPath.row] floatValue]:cell.frame.size.height)];
+                UILabel *lockView=[[UILabel alloc]initWithFrame:CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
                 lockView.text=[self.mYTableDatas objectAtIndex:indexPath.row];
                 lockView.textColor=RGB(84, 84, 84);
                 lockView.textAlignment=NSTextAlignmentCenter;
                 lockView.numberOfLines=0;
                 lockView.font=self.textFont;
-                cell.lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[indexPath.row] floatValue]:cell.frame.size.height);
+                cell.lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45);
                 cell.lockViewWidthConstraint.constant=[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70;
                 [cell.lockView addSubview:lockView];
                 cell.lockView.layer.borderWidth=0.6;
@@ -367,7 +367,7 @@
                 CGFloat x=0;
                 int i=1;
                 for (NSString *data in [self.mXTableDatas objectAtIndex:indexPath.row-1]) {
-                    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>70?[self.mColumeMaxWidths[i]floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[indexPath.row] floatValue]:cell.frame.size.height)];
+                    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>70?[self.mColumeMaxWidths[i]floatValue]:70, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
                     UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
                     dataView.text=data;
                     dataView.textColor=RGB(84, 84, 84);
@@ -399,7 +399,7 @@
                 CGFloat x=0;
                 int i=0;
                 for (NSString *data in _mFristRowDatas) {
-                    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>70?[self.mColumeMaxWidths[i]floatValue]:70,[self.mRowMaxHeights[indexPath.row] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[indexPath.row] floatValue]:cell.frame.size.height)];
+                    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>70?[self.mColumeMaxWidths[i]floatValue]:70,[self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
                     UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
                     dataView.text=data;
                     dataView.textColor=RGB(94, 153, 251);
@@ -425,7 +425,7 @@
                 CGFloat x=0;
                 int i=0;
                 for (NSString *data in [self.mXTableDatas objectAtIndex:indexPath.row-1]) {
-                    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>70?[self.mColumeMaxWidths[i]floatValue]:70,[self.mRowMaxHeights[indexPath.row] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[indexPath.row] floatValue]:cell.frame.size.height)];
+                    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>70?[self.mColumeMaxWidths[i]floatValue]:70,[self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
                     UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
                     dataView.text=data;
                     dataView.textColor=RGB(84, 84, 84);
@@ -476,13 +476,13 @@
            //如果第一列锁定
             ExcelLockCell *cell=[[[NSBundle mainBundle]loadNibNamed:@"ExcelLockCell" owner:nil options:nil]lastObject];
             //构造锁定视图
-            UILabel *lockView=[[UILabel alloc]initWithFrame:CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[0] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[0] floatValue]:cell.frame.size.height)];
+            UILabel *lockView=[[UILabel alloc]initWithFrame:CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[0] floatValue]>45?[self.mRowMaxHeights[0] floatValue]:45)];
             lockView.text=[self.mYTableDatas objectAtIndex:0];
             lockView.textColor=RGB(94, 153, 251);
             lockView.textAlignment=NSTextAlignmentCenter;
             lockView.numberOfLines=0;
             lockView.font=self.textFont;
-            lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[0] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[0] floatValue]:cell.frame.size.height);
+            lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70, [self.mRowMaxHeights[0] floatValue]>45?[self.mRowMaxHeights[0] floatValue]:45);
             cell.lockViewWidthConstraint.constant=[self.mColumeMaxWidths[0] floatValue]>70?[self.mColumeMaxWidths[0] floatValue]:70;
             [cell.lockView addSubview:lockView];
             cell.lockView.layer.borderWidth=0.6;
@@ -492,7 +492,7 @@
             CGFloat x=0;
             int i=1;
             for (NSString *data in self.mFristRowDatas) {
-                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i] floatValue]>70?[self.mColumeMaxWidths[i] floatValue]:70, [self.mRowMaxHeights[0] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[0] floatValue]:cell.frame.size.height)];
+                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i] floatValue]>70?[self.mColumeMaxWidths[i] floatValue]:70, [self.mRowMaxHeights[0] floatValue]>45?[self.mRowMaxHeights[0] floatValue]:45)];
                 UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
                 dataView.text=data;
                 dataView.textColor=RGB(94, 153, 251);
@@ -520,7 +520,7 @@
             CGFloat x=0;
             int i=0;
             for (NSString *data in _mFristRowDatas) {
-                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i] floatValue]>70?[self.mColumeMaxWidths[i] floatValue]:70,[self.mRowMaxHeights[0] floatValue]>cell.frame.size.height?[self.mRowMaxHeights[0] floatValue]:cell.frame.size.height)];
+                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i] floatValue]>70?[self.mColumeMaxWidths[i] floatValue]:70,[self.mRowMaxHeights[0] floatValue]>45?[self.mRowMaxHeights[0] floatValue]:45)];
                 UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
                 dataView.text=data;
                 dataView.textColor=RGB(94, 153, 251);
