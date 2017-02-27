@@ -3,7 +3,7 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 
 ##效果展示
 
-![image](https://github.com/RmondJone/ExcelView/blob/master/ExcelViewDemo/show.gif)
+![image](https://github.com/RmondJone/ExcelView/blob/master/show.gif)
 
 ##更新日志
 
