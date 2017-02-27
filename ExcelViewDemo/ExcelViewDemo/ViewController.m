@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.leftTableDataArray=(NSMutableArray *)@[@"塔城",@"哈密1111111111111111111",@"和田",@"阿勒泰",@"克州"];
+    self.leftTableDataArray=(NSMutableArray *)@[@"塔城",@"哈密",@"和田",@"阿勒泰",@"克州"];
     self.rightTableHeadArray=(NSMutableArray *)@[@"当日收入（万）",@"同比",@"环比",@"当月收入（万）",@"同比",@"环比",@"当年收入（万）",@"同比",@"环比"];
     self.excelDataArray=(NSMutableArray *)@[@[@"2.91111111111111111",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%11111111111111111111",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"]];
     
@@ -33,7 +33,7 @@
     excelView.columnTitlte=@"地区";
     [excelView show];
     [self.view addSubview:excelView];
-    
+
     
     //xib布局添加方式
     self.mExcelView.topTableHeadDatas=self.rightTableHeadArray;
@@ -43,6 +43,7 @@
     self.mExcelView.isLockFristRow=YES;
     self.mExcelView.isColumnTitlte=YES;
     self.mExcelView.columnTitlte=@"地区";
+    self.mExcelView.columnMaxWidth=200;
     [self.mExcelView show];
 
     // Do any additional setup after loading the view, typically from a nib.

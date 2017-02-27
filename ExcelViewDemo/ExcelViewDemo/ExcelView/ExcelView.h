@@ -49,6 +49,10 @@
  */
 @property(nonatomic,retain) UIColor *fristRowBackGround;
 /**
+ 列最大宽度
+ */
+@property(nonatomic) CGFloat columnMaxWidth;
+/**
  显示，必须调用该方法，视图才会展现
  */
 -(void)show;
