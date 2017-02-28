@@ -40,6 +40,12 @@
 @property(nonatomic,retain) NSMutableArray *tableDatas;
 
 /**
+ 表格数据（2维数组，每一行为一个子单元，只接受字符串，例：@[@[],@[],....]
+ 设置该属性之后，columnTitlte、topTableHeadDatas、leftTabHeadDatas、tableDatas将被重置。
+ */
+@property(nonatomic,retain) NSMutableArray *allTableDatas;
+
+/**
  设置字体
  */
 @property(nonatomic,retain) UIFont *textFont;

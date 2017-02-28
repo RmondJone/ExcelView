@@ -82,6 +82,47 @@
  显示
  */
 -(void)show{
+    if(self.allTableDatas!=nil&&self.allTableDatas.count>0){
+        //执行数据分解
+        //清空数组
+        if (_topTableHeadDatas!=nil) {
+            [self.topTableHeadDatas removeAllObjects];
+        }
+        if(_leftTabHeadDatas!=nil){
+            [self.leftTabHeadDatas removeAllObjects];
+        }
+        if(_tableDatas!=nil){
+            [self.tableDatas removeAllObjects];
+        }
+        self.topTableHeadDatas=[NSMutableArray arrayWithCapacity:10];
+        self.leftTabHeadDatas=[NSMutableArray arrayWithCapacity:10];
+        self.tableDatas=[NSMutableArray arrayWithCapacity:10];
+        //构造数据
+        NSArray *fristArray=self.allTableDatas[0];
+        NSUInteger rownumbers=fristArray.count;
+        for (int i=0;i<self.allTableDatas.count;i++) {
+            NSArray *array=self.allTableDatas[i];
+            if (array.count!=rownumbers) {
+                NSLog(@"第%d行数据，和其他行数据个数不一致！",i+1);
+                return;
+            }
+            if (i==0) {
+                NSArray *array=self.allTableDatas[i];
+                self.columnTitlte=array[0];
+                for (int j=1; j<array.count; j++) {
+                    [self.topTableHeadDatas addObject:array[j]];
+                }
+            }else{
+                NSArray *array=self.allTableDatas[i];
+                [self.leftTabHeadDatas addObject:array[0]];
+                NSMutableArray *rowData=[NSMutableArray arrayWithCapacity:10];
+                for (int j=1; j<array.count; j++) {
+                    [rowData addObject:array[j]];
+                }
+                [self.tableDatas addObject:rowData];
+            }
+        }
+    }
     //判断数据是否合法
     if(_topTableHeadDatas!=nil&&_leftTabHeadDatas!=nil&&_tableDatas!=nil){
         if(_leftTabHeadDatas.count==_tableDatas.count){
