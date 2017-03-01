@@ -57,8 +57,6 @@
 -(void)initView{
     self.mTableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
 //    NSLog(@"宽度：%f高度：%f",self.frame.size.width, self.frame.size.height);
-    self.mTableView.delegate=self;
-    self.mTableView.dataSource=self;
     self.mTableView.tableFooterView=[UIView new];
     self.mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.mTableView registerNib:[UINib nibWithNibName:@"ExcelViewCell" bundle:nil] forCellReuseIdentifier:@"ExcelViewCell"];
@@ -244,6 +242,8 @@
                 [self.mFristRowDatas addObjectsFromArray:_topTableHeadDatas];
             }
             //构造视图
+            self.mTableView.delegate=self;
+            self.mTableView.dataSource=self;
             [self.mTableView reloadData];
         }else{
             NSLog(@"数据非法！第一列表头数据和实际数据项单列数据个数不一致");
