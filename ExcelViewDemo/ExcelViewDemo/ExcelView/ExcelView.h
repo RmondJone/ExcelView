@@ -10,6 +10,10 @@
 #import "UILabel+FitWitdhAndHeight.h"
 @interface ExcelView : UIView<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 /**
+ 表格主视图
+ */
+@property(nonatomic,retain) UITableView *mTableView;
+/**
  是否锁定第一列
  */
 @property BOOL isLockFristColumn;
@@ -58,6 +62,10 @@
  列最大宽度
  */
 @property(nonatomic) CGFloat columnMaxWidth;
+/**
+ 列最小宽度
+ */
+@property(nonatomic) CGFloat columnMinWidth;
 /**
  显示，必须调用该方法，视图才会展现
  */
