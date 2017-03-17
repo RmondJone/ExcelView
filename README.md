@@ -1,11 +1,11 @@
 # ExcelView
 IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双向表头。<br>
 
-##效果展示
+## 效果展示
 
 ![image](https://github.com/RmondJone/ExcelView/blob/master/show.gif)
 
-##更新日志
+## 更新日志
 
 * 更新时间2017年02月11日09:48:27  -----ExcelView V1.0.0
 
@@ -28,7 +28,7 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 
 
 
-##API使用说明
+## API使用说明
 
 ```objective-c
     self.leftTableDataArray=(NSMutableArray *)@[@"塔城",@"哈密",@"和田",@"阿勒泰",@"克州"];
@@ -60,7 +60,7 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
     [self.mExcelView show];
 
 ```
-##目前支持可自定义属性
+## 目前支持可自定义属性
 
 ```objective-c
 /**
@@ -118,11 +118,11 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 -(void)show;
 
 ```
-##使用说明
+## 使用说明
 * 直接复制项目根目录里ExcelView文件夹到你的项目中
 * 在需要用的地方引入 #import "ExcelView.h" 头文件，或者直接在PCH文件中引入
 
-##问题反馈
+## 问题反馈
 * 联系方式：QQ(2318560278）
 * 技术交流群：QQ(264587303)
 * Demo作者：郭翰林
