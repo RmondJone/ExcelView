@@ -135,11 +135,11 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 /**
  滚动视图滑动到最左侧的Block
  */
-@property(nonatomic,assign) ScrollViewToLeftBlock mLeftblock;
+@property(nonatomic,copy) ScrollViewToLeftBlock mLeftblock;
 /**
  滚动视图滑动到最右侧的Block
  */
-@property(nonatomic,assign) ScrollViewToRightBlock mRightblock;
+@property(nonatomic,copy) ScrollViewToRightBlock mRightblock;
 /**
  显示，并加入滚动视图监听回调
 
