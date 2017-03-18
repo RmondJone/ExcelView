@@ -25,6 +25,10 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 
   部分BUG修改，新增最小列宽属性
 
+* 更新时间2017年03月18日12:17:40  -----ExcelView V1.0.5   
+
+  新增滚动视图监听Block，滑动到最左侧或者最右侧自定义处理事件，防止有部分滚动视图嵌套表格的需求
+
 
 
 
@@ -58,7 +62,14 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
     self.mExcelView.columnTitlte=@"地区";
     self.mExcelView.columnMaxWidth=200;
     self.mExcelView.columnMinWidth=100;
-    [self.mExcelView show];
+    [self.mExcelView showWithLeftBlock:^(CGPoint contentOffset) {
+        NSLog(@"滚动到了最左侧！");
+        NSLog(@"偏移量：%f",contentOffset.x);
+    } AndWithRigthBlock:^(CGPoint contentOffset) {
+        NSLog(@"滚动到了最右侧！");
+        NSLog(@"偏移量：%f",contentOffset.x);
+    }];
+
 
 ```
 ## 目前支持可自定义属性
@@ -121,6 +132,22 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
  显示，必须调用该方法，视图才会展现
  */
 -(void)show;
+/**
+ 滚动视图滑动到最左侧的Block
+ */
+@property(nonatomic,assign) ScrollViewToLeftBlock mLeftblock;
+/**
+ 滚动视图滑动到最右侧的Block
+ */
+@property(nonatomic,assign) ScrollViewToRightBlock mRightblock;
+/**
+ 显示，并加入滚动视图监听回调
+
+ @param leftblock 滚动视图滑动到最左侧的Block
+ @param rightblock 滚动视图滑动到最右侧的Block
+ */
+-(void)showWithLeftBlock:(ScrollViewToLeftBlock)leftblock AndWithRigthBlock:(ScrollViewToRightBlock) rightblock;
+
 
 ```
 ## 使用说明

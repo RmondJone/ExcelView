@@ -46,7 +46,14 @@
     self.mExcelView.isColumnTitlte=YES;
     self.mExcelView.columnTitlte=@"地区";
     self.mExcelView.columnMaxWidth=200;
-    [self.mExcelView show];
+    self.mExcelView.columnMinWidth=100;
+    [self.mExcelView showWithLeftBlock:^(CGPoint contentOffset) {
+        NSLog(@"滚动到了最左侧！");
+        NSLog(@"偏移量：%f",contentOffset.x);
+    } AndWithRigthBlock:^(CGPoint contentOffset) {
+        NSLog(@"滚动到了最右侧！");
+        NSLog(@"偏移量：%f",contentOffset.x);
+    }];
 
     // Do any additional setup after loading the view, typically from a nib.
 }

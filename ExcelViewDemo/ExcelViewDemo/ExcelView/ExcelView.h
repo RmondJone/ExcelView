@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "UILabel+FitWitdhAndHeight.h"
+/**
+ 滚动视图滑动到最左侧的Block
+ */
+typedef void (^ScrollViewToLeftBlock)(CGPoint contentOffset);
+/**
+  滚动视图滑动到最右侧的Block
+ */
+typedef void(^ScrollViewToRightBlock)(CGPoint contentOffset);
+
 @interface ExcelView : UIView<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 /**
  表格主视图
@@ -67,7 +76,22 @@
  */
 @property(nonatomic) CGFloat columnMinWidth;
 /**
- 显示，必须调用该方法，视图才会展现
+ 显示，必须调用该方法或者调用showWith:方法，视图才会展现
  */
 -(void)show;
+/**
+ 滚动视图滑动到最左侧的Block
+ */
+@property(nonatomic,assign) ScrollViewToLeftBlock mLeftblock;
+/**
+ 滚动视图滑动到最右侧的Block
+ */
+@property(nonatomic,assign) ScrollViewToRightBlock mRightblock;
+/**
+ 显示，并加入滚动视图监听回调
+
+ @param leftblock 滚动视图滑动到最左侧的Block
+ @param rightblock 滚动视图滑动到最右侧的Block
+ */
+-(void)showWithLeftBlock:(ScrollViewToLeftBlock)leftblock AndWithRigthBlock:(ScrollViewToRightBlock) rightblock;
 @end

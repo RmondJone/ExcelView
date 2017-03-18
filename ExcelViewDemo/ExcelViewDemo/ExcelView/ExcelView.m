@@ -17,6 +17,7 @@
 @property(nonatomic) CGPoint mContentOffset;//记录每次滚动结束之后的偏移量，防止列表重刷页面时偏移量复位。
 @property(nonatomic,retain) NSMutableArray *mColumeMaxWidths;//记录每列最大的宽度，自适应宽度
 @property(nonatomic,retain) NSMutableArray *mRowMaxHeights;//记录每行最大高度，自适应高度
+@property CGFloat  mLockViewWidth;//记录锁定视图宽度，后面计算滚动视图是否滑到最右边
 @end
 
 @implementation ExcelView
@@ -73,14 +74,25 @@
     self.fristRowBackGround=RGB(229, 239, 254);
     self.columnMaxWidth=100;
     self.columnMinWidth=70;
+    self.mLockViewWidth=0;
     [self addSubview:self.mTableView];
  }
 
 /**
  显示
+ @param leftblock  滚动视图滑动到最左侧的Block
+ @param rightblock  滚动视图滑动到最右侧的Block
+ */
+-(void)showWithLeftBlock:(ScrollViewToLeftBlock)leftblock AndWithRigthBlock:(ScrollViewToRightBlock)rightblock{
+    [self show];
+    self.mLeftblock=leftblock;
+    self.mRightblock=rightblock;
+}
+/**
+ 显示
  */
 -(void)show{
-    //首先情况数据，如果再次刷新会存在，数据缓存的问题
+    //首先清除数据，如果再次刷新会存在，数据缓存的问题
     [self.mXTableDatas removeAllObjects];
     [self.mYTableDatas removeAllObjects];
     [self.mFristRowDatas removeAllObjects];
@@ -289,6 +301,7 @@
             lockView.textColor=RGB(84, 84, 84);
             lockView.numberOfLines=0;
             lockView.font=self.textFont;
+            self.mLockViewWidth=lockView.frame.size.width;
             //更改锁定视图frame
             cell.lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45);
             cell.lockViewWidthConstraint.constant=[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth;
@@ -367,6 +380,7 @@
                 lockView.textAlignment=NSTextAlignmentCenter;
                 lockView.numberOfLines=0;
                 lockView.font=self.textFont;
+                self.mLockViewWidth=lockView.frame.size.width;
                 //更改锁定视图frame
                 cell.lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45);
                 cell.lockViewWidthConstraint.constant=[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth;
@@ -615,9 +629,27 @@
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+//    NSLog(@"scrollview内容视图宽度:%f",scrollView.contentSize.width);
 //    NSLog(@"scollView滚动结束位移：%f,%f", scrollView.contentOffset.x, scrollView.contentOffset.y);
+//    NSLog(@"scrollView显示的宽度：%f",self.frame.size.width-self.mLockViewWidth);
     if (scrollView!=self.mTableView) {
+        //记录每次滚动结束之后的偏移量，防止列表重刷页面时偏移量复位
         self.mContentOffset=scrollView.contentOffset;
+        
+        if(scrollView.contentOffset.x==0){
+//            NSLog(@"滑动到最左侧！");
+            if (self.mLeftblock!=nil) {
+                self.mLeftblock(scrollView.contentOffset);
+            }
+        }
+        CGFloat scrollViewWidth=scrollView.contentSize.width;
+        CGFloat scrollViewOffestX=scrollView.contentOffset.x;
+        if (scrollViewWidth-scrollViewOffestX==self.frame.size.width-self.mLockViewWidth) {
+//            NSLog(@"滑动到最右侧！");
+            if (self.mRightblock!=nil) {
+                self.mRightblock(scrollView.contentOffset);
+            }
+        }
     }
  }
 
