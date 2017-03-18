@@ -82,11 +82,11 @@ typedef void(^ScrollViewToRightBlock)(CGPoint contentOffset);
 /**
  滚动视图滑动到最左侧的Block
  */
-@property(nonatomic,assign) ScrollViewToLeftBlock mLeftblock;
+@property(nonatomic,copy) ScrollViewToLeftBlock mLeftblock;
 /**
  滚动视图滑动到最右侧的Block
  */
-@property(nonatomic,assign) ScrollViewToRightBlock mRightblock;
+@property(nonatomic,copy) ScrollViewToRightBlock mRightblock;
 /**
  显示，并加入滚动视图监听回调
 
