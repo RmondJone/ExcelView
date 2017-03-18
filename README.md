@@ -15,7 +15,7 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 
 * 更新时间2017年02月27日15:58:07  -----ExcelView V1.0.2   
 
-  添加表格高度自适应,添加设置单元格最大行宽
+  添加表格高度自适应,添加设置单元格最大列宽
 
 * 更新时间2017年02月28日20:23:50  -----ExcelView V1.0.3   
 
@@ -57,6 +57,7 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
     self.mExcelView.isColumnTitlte=YES;
     self.mExcelView.columnTitlte=@"地区";
     self.mExcelView.columnMaxWidth=200;
+    self.mExcelView.columnMinWidth=100;
     [self.mExcelView show];
 
 ```
@@ -112,6 +113,10 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
  列最大宽度
  */
 @property(nonatomic) CGFloat columnMaxWidth;
+/**
+ 列最小宽度
+ */
+@property(nonatomic) CGFloat columnMinWidth;
 /**
  显示，必须调用该方法，视图才会展现
  */
