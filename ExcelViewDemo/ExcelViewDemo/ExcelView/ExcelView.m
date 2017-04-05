@@ -7,8 +7,10 @@
 //
 
 #import "ExcelView.h"
+#import "ExcelLockSection.h"
+#import "ExcelSection.h"
 #import "ExcelLockCell.h"
-#import "ExcelViewCell.h"
+#import "ExcelUnLockCell.h"
 @interface ExcelView ()
 @property(nonatomic,retain) NSMutableArray *mXTableDatas;//横向单行数据列表
 @property(nonatomic,retain) NSMutableArray *mYTableDatas;//如果锁定第一列则设置第一列数据集合
@@ -18,6 +20,7 @@
 @property(nonatomic,retain) NSMutableArray *mColumeMaxWidths;//记录每列最大的宽度，自适应宽度
 @property(nonatomic,retain) NSMutableArray *mRowMaxHeights;//记录每行最大高度，自适应高度
 @property CGFloat  mLockViewWidth;//记录锁定视图宽度，后面计算滚动视图是否滑到最右边
+@property UIScrollView *mHeadScrollView;//头部滚动视图
 @end
 
 @implementation ExcelView
@@ -59,6 +62,7 @@
 //    NSLog(@"宽度：%f高度：%f",self.frame.size.width, self.frame.size.height);
     self.mTableView.tableFooterView=[UIView new];
     self.mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.mTableView.showsVerticalScrollIndicator=NO;
     [self.mTableView registerNib:[UINib nibWithNibName:@"ExcelViewCell" bundle:nil] forCellReuseIdentifier:@"ExcelViewCell"];
     [self.mTableView registerNib:[UINib nibWithNibName:@"ExcelLockCell" bundle:nil] forCellReuseIdentifier:@"ExcelLockCell"];
     self.mXTableDatas=[NSMutableArray arrayWithCapacity:10];
@@ -179,11 +183,16 @@
                     CGFloat value=[UILabel getWidthWithTitle:columeData[j] font:self.textFont];
 //                    NSLog(@"第%d列第%d行宽度:%f",i,j,value);
                     if (value>maxwidth) {
-                        value=value<_columnMaxWidth?value:_columnMaxWidth;
-                        self.mColumeMaxWidths[i]=[NSNumber numberWithDouble:value+10];
-                        maxwidth=value;
+                        if(value<self.columnMinWidth){
+                            self.mColumeMaxWidths[i]=[NSNumber numberWithDouble:self.columnMinWidth+10];
+                        }else if(value>self.columnMinWidth &&value<self.columnMaxWidth){
+                            self.mColumeMaxWidths[i]=[NSNumber numberWithDouble:value+10];
+                        }else{
+                            self.mColumeMaxWidths[i]=[NSNumber numberWithDouble:self.columnMaxWidth+10];
+                        }
+                        maxwidth=[self.mColumeMaxWidths[i] floatValue];
                     }else{
-                        self.mColumeMaxWidths[i]=[NSNumber numberWithDouble:maxwidth+10];
+                        self.mColumeMaxWidths[i]=[NSNumber numberWithDouble:maxwidth];
                     }
                 }
             }
@@ -214,14 +223,18 @@
                 for (int j=0; j<rowData.count; j++) {
                     CGFloat value=[UILabel getHeightByWidth:[self.mColumeMaxWidths[j] floatValue]title:rowData[j] font:self.textFont];
                     if (value>maxheight) {
-                        self.mRowMaxHeights[i]=[NSNumber numberWithDouble:value+10];
-                        maxheight=value;
+                        if (value<45) {
+                             self.mRowMaxHeights[i]=[NSNumber numberWithDouble:45];
+                        }else{
+                             self.mRowMaxHeights[i]=[NSNumber numberWithDouble:value];
+                        }
+                        maxheight=[self.mRowMaxHeights[i] floatValue];
                     }else{
-                        self.mRowMaxHeights[i]=[NSNumber numberWithDouble:maxheight+10];
+                        self.mRowMaxHeights[i]=[NSNumber numberWithDouble:maxheight];
                     }
                 }
             }
-//            NSLog(@"%@",self.mRowMaxHeights);
+//            NSLog(@"每行高度%@",self.mRowMaxHeights);
             //构造每行数据
             for (int i=0;i<_tableDatas.count;i++) {
                 NSArray *rowArray=_tableDatas[i];
@@ -265,6 +278,20 @@
             self.mTableView.delegate=self;
             self.mTableView.dataSource=self;
             [self.mTableView reloadData];
+            //设置头部滚动视图
+            if (self.isLockFristRow) {
+                if (self.isLockFristColumn) {
+                    ExcelLockCell *cell=(ExcelLockCell *)[self.mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                    [cell setHeadScrollView:^UIScrollView *{
+                        return  self.mHeadScrollView;
+                    }];
+                }else{
+                    ExcelUnLockCell *cell=(ExcelUnLockCell *)[self.mTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                    [cell setHeadScrollView:^UIScrollView *{
+                        return  self.mHeadScrollView;
+                    }];
+                }
+            }
         }else{
             NSLog(@"数据非法！第一列表头数据和实际数据项单列数据个数不一致");
             return;
@@ -278,275 +305,140 @@
 //        NSLog(@"第%d行数据:%@",i+2,_mXTableDatas[i]);
 //    }
 //    NSLog(@"第一列数据:%@",self.mYTableDatas);
-
+//
 }
 
 
 
 #pragma mark UITableViewDelegate
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (_isLockFristRow) {
-       //如果锁第一行
-        if(_isLockFristColumn){
-           //如果锁第一列
-            //不要复用cell，要不然cell里视图会成倍复写，这样总scrollView视图数组就会出现问题
-            ExcelLockCell *cell=[tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
-            if (!cell) {
-                cell=(ExcelLockCell *)[[[NSBundle mainBundle]loadNibNamed:@"ExcelLockCell" owner:nil options:nil]lastObject];
-            }
-            //构造锁定视图
-            UILabel *lockView=[[UILabel alloc]initWithFrame:CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
-            lockView.text=[self.mYTableDatas objectAtIndex:indexPath.row+1];
-            lockView.textAlignment=NSTextAlignmentCenter;
-            lockView.textColor=RGB(84, 84, 84);
-            lockView.numberOfLines=0;
-            lockView.font=self.textFont;
-            self.mLockViewWidth=lockView.frame.size.width;
-            //更改锁定视图frame
-            cell.lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45);
-            cell.lockViewWidthConstraint.constant=[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth;
-            [cell.lockView addSubview:lockView];
-            cell.lockView.layer.borderWidth=0.6;
-            cell.lockView.layer.borderColor=[UIColor groupTableViewBackgroundColor].CGColor;
-            //构造滚动视图
-            CGFloat x=0;
-            int i=1;
-            for (NSString *data in [self.mXTableDatas objectAtIndex:indexPath.row]) {
-                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[i]floatValue]:self.columnMinWidth, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
-                UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
-                dataView.text=data;
-                dataView.textColor=RGB(84, 84, 84);
-                dataView.textAlignment=NSTextAlignmentCenter;
-                dataView.numberOfLines=0;
-                dataView.font=self.textFont;
-                [view addSubview:dataView];
-                view.layer.borderWidth=0.6;
-                view.layer.borderColor=[UIColor groupTableViewBackgroundColor].CGColor;
-                [cell.scrollView addSubview:view];
-                x+=view.frame.size.width;
-                i++;
-            }
-            cell.scrollView.contentSize=CGSizeMake(x, cell.scrollView.frame.size.height);
-            //加入滚动视图数组
-            cell.scrollView.delegate=self;
-            cell.scrollView.bounces=NO;
-            cell.scrollView.contentOffset=self.mContentOffset;
-            [self.mScrollViewArray addObject:cell.scrollView];
-            return cell;
-        }else{
-            ExcelViewCell *cell=[tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
-            if (!cell) {
-                cell=[[[NSBundle mainBundle]loadNibNamed:@"ExcelViewCell" owner:nil options:nil]lastObject];
-            }
-            //构造滚动视图
-            CGFloat x=0;
-            int i=0;
-            for (NSString *data in [self.mXTableDatas objectAtIndex:indexPath.row]) {
-                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0,[self.mColumeMaxWidths[i]floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[i]floatValue]:self.columnMinWidth,[self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
-                UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
-                dataView.text=data;
-                dataView.textColor=RGB(84, 84, 84);
-                dataView.textAlignment=NSTextAlignmentCenter;
-                dataView.numberOfLines=0;
-                dataView.font=self.textFont;
-                [view addSubview:dataView];
-                view.layer.borderWidth=0.6;
-                view.layer.borderColor=[UIColor groupTableViewBackgroundColor].CGColor;
-                [cell.scrollView addSubview:view];
-                x+=view.frame.size.width;
-                i++;
-            }
-            cell.scrollView.contentSize=CGSizeMake(x, cell.scrollView.frame.size.height);
-            //加入滚动视图数组
-            cell.scrollView.delegate=self;
-            cell.scrollView.bounces=NO;
-            cell.scrollView.contentOffset=self.mContentOffset;
-            [self.mScrollViewArray addObject:cell.scrollView];
-             return cell;
+    if (_isLockFristColumn) {
+        self.mLockViewWidth=[self.mColumeMaxWidths[0] floatValue];
+        ExcelLockCell *cell=[tableView dequeueReusableCellWithIdentifier:@"ExcelLockCell"];
+        if (!cell) {
+            cell=(ExcelLockCell *)[[[NSBundle mainBundle]loadNibNamed:@"ExcelLockCell" owner:nil options:nil]lastObject];
         }
+        //需求通过Block设值,因为第一层先绘制
+        [cell setXTableDatas:^NSMutableArray *{
+            return self.mXTableDatas;
+        }];
+        [cell setYTableDatas:^NSMutableArray *{
+            return self.mYTableDatas;
+        }];
+        [cell setFristRowDatas:^NSMutableArray *{
+            return self.mFristRowDatas;
+        }];
+        [cell setColumeMaxWidths:^NSMutableArray *{
+            return self.mColumeMaxWidths;
+        }];
+        [cell setRowMaxHeights:^NSMutableArray *{
+            return self.mRowMaxHeights;
+        }];
+        [cell setFristRowBackGroundBolck:^UIColor *{
+            return self.fristRowBackGround;
+        }];
+        [cell setIsLockFristRowBolck:^BOOL{
+            return self.isLockFristRow;
+        }];
+        [cell setLockTextFontBolck:^UIFont *{
+            return self.textFont;
+        }];
+        //此方法调用才会绘制
+        [cell initViewWithScrollViewLeftBolck:^(CGPoint contentOffset) {
+            if (self.mLeftblock!=nil) {
+                self.mLeftblock(contentOffset);
+            }
+        } AndScrollViewRightBolck:^(CGPoint contentOffset) {
+            if (self.mRightblock!=nil) {
+                self.mRightblock(contentOffset);
+            }
+        }];
+        [self.mScrollViewArray addObject:cell.scrollView];
+        return cell;
     }else{
-        //如果不锁第一行
-        if(_isLockFristColumn){
-            //如果锁第一列
-            ExcelLockCell *cell=[tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
-            if (!cell) {
-                cell=(ExcelLockCell *)[[[NSBundle mainBundle]loadNibNamed:@"ExcelLockCell" owner:nil options:nil]lastObject];
-            }
-            if(indexPath.row==0){
-                //构造锁定视图
-                UILabel *lockView=[[UILabel alloc]initWithFrame:CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
-                lockView.text=[self.mYTableDatas objectAtIndex:indexPath.row];
-                lockView.textColor=RGB(94, 153, 251);
-                lockView.textAlignment=NSTextAlignmentCenter;
-                lockView.numberOfLines=0;
-                lockView.font=self.textFont;
-                self.mLockViewWidth=lockView.frame.size.width;
-                //更改锁定视图frame
-                cell.lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45);
-                cell.lockViewWidthConstraint.constant=[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth;
-                [cell.lockView addSubview:lockView];
-                cell.lockView.layer.borderWidth=0.6;
-                cell.lockView.layer.borderColor=[UIColor whiteColor].CGColor;
-                cell.lockView.layer.backgroundColor=self.fristRowBackGround.CGColor;
-                //构造滚动视图
-                CGFloat x=0;
-                int i=1;
-                for (NSString *data in self.mFristRowDatas) {
-                    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[i]floatValue]:self.columnMinWidth, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
-                    UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
-                    dataView.text=data;
-                    dataView.textColor=RGB(94, 153, 251);
-                    dataView.textAlignment=NSTextAlignmentCenter;
-                    dataView.numberOfLines=0;
-                    dataView.font=self.textFont;
-                    [view addSubview:dataView];
-                    view.layer.borderWidth=0.6;
-                    view.layer.borderColor=[UIColor whiteColor].CGColor;
-                    view.layer.backgroundColor=self.fristRowBackGround.CGColor;
-                    [cell.scrollView addSubview:view];
-                    x+=view.frame.size.width;
-                    i++;
-                }
-                cell.scrollView.contentSize=CGSizeMake(x, cell.scrollView.frame.size.height);
-                //加入滚动视图数组
-                cell.scrollView.delegate=self;
-                cell.scrollView.bounces=NO;
-                cell.scrollView.contentOffset=self.mContentOffset;
-                [self.mScrollViewArray addObject:cell.scrollView];
-            }else{
-                //构造锁定视图
-                UILabel *lockView=[[UILabel alloc]initWithFrame:CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
-                lockView.text=[self.mYTableDatas objectAtIndex:indexPath.row];
-                lockView.textColor=RGB(84, 84, 84);
-                lockView.textAlignment=NSTextAlignmentCenter;
-                lockView.numberOfLines=0;
-                lockView.font=self.textFont;
-                cell.lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45);
-                cell.lockViewWidthConstraint.constant=[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth;
-                [cell.lockView addSubview:lockView];
-                cell.lockView.layer.borderWidth=0.6;
-                cell.lockView.layer.borderColor=[UIColor groupTableViewBackgroundColor].CGColor;
-                //构造滚动视图
-                CGFloat x=0;
-                int i=1;
-                for (NSString *data in [self.mXTableDatas objectAtIndex:indexPath.row-1]) {
-                    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[i]floatValue]:self.columnMinWidth, [self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
-                    UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
-                    dataView.text=data;
-                    dataView.textColor=RGB(84, 84, 84);
-                    dataView.textAlignment=NSTextAlignmentCenter;
-                    dataView.numberOfLines=0;
-                    dataView.font=self.textFont;
-                    [view addSubview:dataView];
-                    view.layer.borderWidth=0.6;
-                    view.layer.borderColor=[UIColor groupTableViewBackgroundColor].CGColor;
-                    [cell.scrollView addSubview:view];
-                    x+=view.frame.size.width;
-                    i++;
-                }
-                cell.scrollView.contentSize=CGSizeMake(x, cell.scrollView.frame.size.height);
-                //加入滚动视图数组
-                cell.scrollView.delegate=self;
-                cell.scrollView.bounces=NO;
-                cell.scrollView.contentOffset=self.mContentOffset;
-                [self.mScrollViewArray addObject:cell.scrollView];
-            }
-            return cell;
-        }else{
-            ExcelViewCell *cell=[tableView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
-            if (!cell) {
-                cell=[[[NSBundle mainBundle]loadNibNamed:@"ExcelViewCell" owner:nil options:nil]lastObject];
-            }
-            if (indexPath.row==0) {
-                //构造滚动视图
-                CGFloat x=0;
-                int i=0;
-                for (NSString *data in _mFristRowDatas) {
-                    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[i]floatValue]:self.columnMinWidth,[self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
-                    UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
-                    dataView.text=data;
-                    dataView.textColor=RGB(94, 153, 251);
-                    dataView.textAlignment=NSTextAlignmentCenter;
-                    dataView.numberOfLines=0;
-                    dataView.font=self.textFont;
-                    [view addSubview:dataView];
-                    view.layer.borderWidth=0.6;
-                    view.layer.borderColor=[UIColor whiteColor].CGColor;
-                    view.layer.backgroundColor=self.fristRowBackGround.CGColor;
-                    [cell.scrollView addSubview:view];
-                    x+=view.frame.size.width;
-                    i++;
-                }
-                cell.scrollView.contentSize=CGSizeMake(x, cell.scrollView.frame.size.height);
-                //加入滚动视图数组
-                cell.scrollView.delegate=self;
-                cell.scrollView.bounces=NO;
-                cell.scrollView.contentOffset=self.mContentOffset;
-                [self.mScrollViewArray addObject:cell.scrollView];
-            }else{
-                //构造滚动视图
-                CGFloat x=0;
-                int i=0;
-                for (NSString *data in [self.mXTableDatas objectAtIndex:indexPath.row-1]) {
-                    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i]floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[i]floatValue]:self.columnMinWidth,[self.mRowMaxHeights[indexPath.row] floatValue]>45?[self.mRowMaxHeights[indexPath.row] floatValue]:45)];
-                    UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
-                    dataView.text=data;
-                    dataView.textColor=RGB(84, 84, 84);
-                    dataView.textAlignment=NSTextAlignmentCenter;
-                    dataView.numberOfLines=0;
-                    dataView.font=self.textFont;
-                    [view addSubview:dataView];
-                    view.layer.borderWidth=0.6;
-                    view.layer.borderColor=[UIColor groupTableViewBackgroundColor].CGColor;
-                    [cell.scrollView addSubview:view];
-                    x+=view.frame.size.width;
-                    i++;
-                }
-                cell.scrollView.contentSize=CGSizeMake(x, cell.scrollView.frame.size.height);
-                //加入滚动视图数组
-                cell.scrollView.delegate=self;
-                cell.scrollView.bounces=NO;
-                cell.scrollView.contentOffset=self.mContentOffset;
-                [self.mScrollViewArray addObject:cell.scrollView];
-            }
-            return cell;
+        ExcelUnLockCell *cell=[tableView dequeueReusableCellWithIdentifier:@"ExcelUnLockCell"];
+        if (!cell) {
+            cell=(ExcelUnLockCell *)[[[NSBundle mainBundle]loadNibNamed:@"ExcelUnLockCell" owner:nil options:nil]lastObject];
         }
+        //需求通过Block设值,因为第一层先绘制
+        [cell setXTableDatas:^NSMutableArray *{
+            return self.mXTableDatas;
+        }];
+        [cell setYTableDatas:^NSMutableArray *{
+            return self.mYTableDatas;
+        }];
+        [cell setFristRowDatas:^NSMutableArray *{
+            return self.mFristRowDatas;
+        }];
+        [cell setColumeMaxWidths:^NSMutableArray *{
+            return self.mColumeMaxWidths;
+        }];
+        [cell setRowMaxHeights:^NSMutableArray *{
+            return self.mRowMaxHeights;
+        }];
+        [cell setFristRowBackGroundBolck:^UIColor *{
+            return self.fristRowBackGround;
+        }];
+        [cell setIsLockFristRowBolck:^BOOL{
+            return self.isLockFristRow;
+        }];
+        [cell setLockTextFontBolck:^UIFont *{
+            return self.textFont;
+        }];
+        //此方法调用才会绘制
+        [cell initViewWithScrollViewLeftBolck:^(CGPoint contentOffset) {
+            if (self.mLeftblock!=nil) {
+                self.mLeftblock(contentOffset);
+            }
+        } AndScrollViewRightBolck:^(CGPoint contentOffset) {
+            if (self.mRightblock!=nil) {
+                self.mRightblock(contentOffset);
+            }
+        }];
+        [self.mScrollViewArray addObject:cell.scrollView];
+        return cell;
     }
     return nil;
 }
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 45;
-}
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_isLockFristRow) {
-        return _leftTabHeadDatas.count;
+        CGFloat cellHeigth=0;
+        for (int i=1; i<_mRowMaxHeights.count; i++) {
+            cellHeigth +=[_mRowMaxHeights[i] floatValue];
+        }
+//        NSLog(@"cell高度:%f",cellHeigth);
+        return cellHeigth;
     }else{
-        return _leftTabHeadDatas.count+1;
+        CGFloat cellHeigth=0;
+        for (int i=0; i<_mRowMaxHeights.count; i++) {
+            cellHeigth +=[_mRowMaxHeights[i] floatValue];
+        }
+//        NSLog(@"cell高度:%f",cellHeigth);
+        return cellHeigth;
     }
     return 0;
 }
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSLog(@"%ld",(long)indexPath.row);
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if(_isLockFristRow){
         if(_isLockFristColumn){
            //如果第一列锁定
-            ExcelLockCell *cell=[[[NSBundle mainBundle]loadNibNamed:@"ExcelLockCell" owner:nil options:nil]lastObject];
+            ExcelLockSection *cell=[[[NSBundle mainBundle]loadNibNamed:@"ExcelLockSection" owner:nil options:nil]lastObject];
             //构造锁定视图
-            UILabel *lockView=[[UILabel alloc]initWithFrame:CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth, [self.mRowMaxHeights[0] floatValue]>45?[self.mRowMaxHeights[0] floatValue]:45)];
+            UILabel *lockView=[[UILabel alloc]initWithFrame:CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue], [self.mRowMaxHeights[0] floatValue])];
             lockView.text=[self.mYTableDatas objectAtIndex:0];
             lockView.textColor=RGB(94, 153, 251);
             lockView.textAlignment=NSTextAlignmentCenter;
             lockView.numberOfLines=0;
             lockView.font=self.textFont;
-            lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth, [self.mRowMaxHeights[0] floatValue]>45?[self.mRowMaxHeights[0] floatValue]:45);
-            cell.lockViewWidthConstraint.constant=[self.mColumeMaxWidths[0] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[0] floatValue]:self.columnMinWidth;
+            lockView.frame=CGRectMake(cell.lockView.frame.origin.x, cell.lockView.frame.origin.y,[self.mColumeMaxWidths[0] floatValue], [self.mRowMaxHeights[0] floatValue]);
+            cell.lockViewWidthConstraint.constant=[self.mColumeMaxWidths[0] floatValue];
             [cell.lockView addSubview:lockView];
             cell.lockView.layer.borderWidth=0.6;
             cell.lockView.layer.borderColor=[UIColor whiteColor].CGColor;
@@ -555,7 +447,7 @@
             CGFloat x=0;
             int i=1;
             for (NSString *data in self.mFristRowDatas) {
-                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[i] floatValue]:self.columnMinWidth, [self.mRowMaxHeights[0] floatValue]>45?[self.mRowMaxHeights[0] floatValue]:45)];
+                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i] floatValue], [self.mRowMaxHeights[0] floatValue])];
                 UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
                 dataView.text=data;
                 dataView.textColor=RGB(94, 153, 251);
@@ -575,15 +467,16 @@
             cell.scrollView.delegate=self;
             cell.scrollView.bounces=NO;
             cell.scrollView.contentOffset=self.mContentOffset;
+            self.mHeadScrollView=cell.scrollView;
             [self.mScrollViewArray addObject:cell.scrollView];
             return cell;
         }else{
-            ExcelViewCell *cell=[[[NSBundle mainBundle]loadNibNamed:@"ExcelViewCell" owner:nil options:nil]lastObject];
+            ExcelSection *cell=[[[NSBundle mainBundle]loadNibNamed:@"ExcelSection" owner:nil options:nil]lastObject];
             //构造滚动视图
             CGFloat x=0;
             int i=0;
             for (NSString *data in _mFristRowDatas) {
-                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i] floatValue]>self.columnMinWidth?[self.mColumeMaxWidths[i] floatValue]:self.columnMinWidth,[self.mRowMaxHeights[0] floatValue]>45?[self.mRowMaxHeights[0] floatValue]:45)];
+                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i] floatValue],[self.mRowMaxHeights[0] floatValue])];
                 UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
                 dataView.text=data;
                 dataView.textColor=RGB(94, 153, 251);
@@ -603,6 +496,7 @@
             cell.scrollView.delegate=self;
             cell.scrollView.bounces=NO;
             cell.scrollView.contentOffset=self.mContentOffset;
+            self.mHeadScrollView=cell.scrollView;
             [self.mScrollViewArray addObject:cell.scrollView];
             return cell;
         }
@@ -612,7 +506,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (_isLockFristRow) {
-        return 45;
+        return [_mRowMaxHeights[0] floatValue];
     }
     return 0;
 }

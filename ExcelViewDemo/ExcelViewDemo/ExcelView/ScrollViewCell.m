@@ -1,14 +1,14 @@
 //
-//  ExcelViewCell.m
-//  xjbmmcIos
+//  ScrollViewCell.m
+//  ExcelViewDemo
 //
-//  Created by 郭翰林 on 2017/2/8.
-//
+//  Created by 郭翰林 on 2017/4/4.
+//  Copyright © 2017年 郭翰林. All rights reserved.
 //
 
-#import "ExcelViewCell.h"
+#import "ScrollViewCell.h"
 
-@implementation ExcelViewCell
+@implementation ScrollViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -20,4 +20,5 @@
 
     // Configure the view for the selected state
 }
+
 @end

@@ -1,5 +1,5 @@
 //
-//  ExcelLockCell.h
+//  ExcelUnLockCell.h
 //  ExcelViewDemo
 //
 //  Created by 郭翰林 on 2017/4/4.
@@ -24,9 +24,7 @@ typedef void (^ScrollViewToLeftBlock)(CGPoint contentOffset);
  滚动视图滑动到最右侧的Block
  */
 typedef void(^ScrollViewToRightBlock)(CGPoint contentOffset);
-@interface ExcelLockCell : UITableViewCell<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
-
-@property (weak, nonatomic) IBOutlet UITableView *lockViewTableView;
+@interface ExcelUnLockCell : UITableViewCell<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *scrollViewTableView;
 /**
@@ -48,6 +46,6 @@ typedef void(^ScrollViewToRightBlock)(CGPoint contentOffset);
 -(void) setFristRowBackGroundBolck:(FristRowBackGround) mFristRowBackGround;
 -(void) setLockTextFontBolck:(LockTextFont) mTextFont;
 -(void) setHeadScrollView:(HeadScrollView) mHeadScrollView;
--(void) initView;
+-(void)initView;
 -(void)initViewWithScrollViewLeftBolck:(ScrollViewToLeftBlock) leftblock AndScrollViewRightBolck:(ScrollViewToRightBlock) rightblock;
 @end

@@ -1,15 +1,14 @@
 //
-//  ExcelLockCell.m
+//  ExcelUnLockCell.m
 //  ExcelViewDemo
 //
 //  Created by 郭翰林 on 2017/4/4.
 //  Copyright © 2017年 郭翰林. All rights reserved.
 //
 
-#import "ExcelLockCell.h"
-#import "LockViewCell.h"
+#import "ExcelUnLockCell.h"
 #import "ScrollViewCell.h"
-@interface ExcelLockCell()
+@interface ExcelUnLockCell()
 @property(nonatomic,retain) NSMutableArray *mXTableDatas;//横向单行数据列表
 @property(nonatomic,retain) NSMutableArray *mYTableDatas;//如果锁定第一列则设置第一列数据集合
 @property(nonatomic,retain) NSMutableArray *mFristRowDatas;//第一行数据
@@ -24,7 +23,8 @@
 @property(nonatomic,retain) NSMutableArray *mScollViews;
 @end
 
-@implementation ExcelLockCell
+@implementation ExcelUnLockCell
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -32,9 +32,9 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+
     // Configure the view for the selected state
 }
-
 #pragma mark 初始化
 -(void)initViewWithScrollViewLeftBolck:(ScrollViewToLeftBlock)leftblock AndScrollViewRightBolck:(ScrollViewToRightBlock)rightblock{
     self.mLeftblock=leftblock;
@@ -46,22 +46,14 @@
  */
 -(void) initView{
     [self initData];
-    //重设视图
-    self.lockViewTableView.frame=CGRectMake(0, 0, [self.mColumeMaxWidths[0] floatValue],_mScrollViewContentHeight);
-    self.scrollView.frame=CGRectMake([self.mColumeMaxWidths[0] floatValue], 0, self.frame.size.width-[self.mColumeMaxWidths[0] floatValue], _mScrollViewContentHeight);
-    self.scrollViewTableView.frame=CGRectMake(0, 0, _mScrollViewContentWidth, _mScrollViewContentHeight);
+    self.scrollView.frame=CGRectMake(0, 0, self.frame.size.width,self.mScrollViewContentHeight);
     self.scrollView.contentSize=CGSizeMake(self.mScrollViewContentWidth, self.mScrollViewContentHeight);
     self.scrollView.bounces=NO;
     self.scrollView.delegate=self;
     [self.mScollViews addObject:self.scrollView];
-    //初始化tableView
-    self.lockViewTableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    [self.lockViewTableView registerNib:[UINib nibWithNibName:@"LockViewCell" bundle:nil] forCellReuseIdentifier:@"LockViewCell"];
-    self.lockViewTableView.scrollEnabled=NO;
-    self.lockViewTableView.delegate=self;
-    self.lockViewTableView.dataSource=self;
     self.scrollViewTableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.scrollViewTableView registerNib:[UINib nibWithNibName:@"ScrollViewCell" bundle:nil] forCellReuseIdentifier:@"ScrollViewCell"];
+    self.scrollViewTableView.frame=CGRectMake(0, 0, self.mScrollViewContentWidth, self.mScrollViewContentHeight);
     self.scrollViewTableView.scrollEnabled=NO;
     self.scrollViewTableView.delegate=self;
     self.scrollViewTableView.dataSource=self;
@@ -73,46 +65,23 @@
     self.mScollViews=[NSMutableArray arrayWithCapacity:10];
     if (self.isLockFristRow) {
         [self.mRowMaxHeights removeObjectAtIndex:0];
-        [self.mYTableDatas removeObjectAtIndex:0];
     }
     for (int i=0; i<self.mRowMaxHeights.count; i++) {
         self.mScrollViewContentHeight+=[self.mRowMaxHeights[i] floatValue];
     }
-    for (int i=1; i<self.mColumeMaxWidths.count; i++) {
+    for (int i=0; i<self.mColumeMaxWidths.count; i++) {
         self.mScrollViewContentWidth+=[self.mColumeMaxWidths[i] floatValue];
     }
-    //    NSLog(@"mRowMaxHeights:%@",self.mRowMaxHeights);
-    //    NSLog(@"mYTableDatas:%@",self.mYTableDatas);
-    //    NSLog(@"mXTableDatas%@",self.mXTableDatas);
-    //    NSLog(@"mScrollViewContentWidth:%f",self.mScrollViewContentWidth);
-    //    NSLog(@"mScrollViewContentHeight:%f",self.mScrollViewContentHeight);
-    
+//        NSLog(@"mRowMaxHeights:%@",self.mRowMaxHeights);
+//        NSLog(@"mYTableDatas:%@",self.mYTableDatas);
+//        NSLog(@"mXTableDatas%@",self.mXTableDatas);
+        NSLog(@"mScrollViewContentWidth:%f",self.mScrollViewContentWidth);
+        NSLog(@"mScrollViewContentHeight:%f",self.mScrollViewContentHeight);
 }
 
 #pragma mark UITableViewDelegate
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (tableView==self.lockViewTableView) {
-        LockViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"LockViewCell"];
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        if (!cell) {
-            cell=[[[NSBundle mainBundle]loadNibNamed:@"LockViewCell" owner:nil options:nil]lastObject];
-        }
-        cell.label.text=self.mYTableDatas[indexPath.row];
-        cell.label.numberOfLines=0;
-        cell.label.font=self.textFont;
-        cell.label.textAlignment=NSTextAlignmentCenter;
-        if (!self.isLockFristRow && indexPath.row==0) {
-            cell.label.textColor=RGB(94, 153, 251);
-            cell.layer.borderWidth=0.6;
-            cell.layer.borderColor=[UIColor whiteColor].CGColor;
-            cell.contentView.layer.backgroundColor=self.fristRowBackGround.CGColor;
-        }else{
-            cell.label.textColor=RGB(84, 84, 84);
-            cell.layer.borderWidth=0.6;
-            cell.layer.borderColor=[UIColor groupTableViewBackgroundColor].CGColor;
-        }
-        return cell;
-    }else if(tableView==self.scrollViewTableView){
+   if(tableView==self.scrollViewTableView){
         ScrollViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"ScrollViewCell"];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         if (!cell) {
@@ -132,7 +101,7 @@
         int x=0;
         if (!self.isLockFristRow && indexPath.row==0) {
             for (int i=0; i<rowDatas.count; i++) {
-                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i+1] floatValue], [self.mRowMaxHeights[indexPath.row] floatValue])];
+                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i] floatValue], [self.mRowMaxHeights[indexPath.row] floatValue])];
                 UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
                 dataView.text=rowDatas[i];
                 dataView.textColor=RGB(94, 153, 251);
@@ -148,7 +117,7 @@
             }
         }else{
             for (int i=0; i<rowDatas.count; i++) {
-                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i+1] floatValue], [self.mRowMaxHeights[indexPath.row] floatValue])];
+                UIView *view=[[UIView alloc]initWithFrame:CGRectMake(x, 0, [self.mColumeMaxWidths[i] floatValue], [self.mRowMaxHeights[indexPath.row] floatValue])];
                 UILabel *dataView=[[UILabel alloc]initWithFrame:view.bounds];
                 dataView.text=rowDatas[i];
                 dataView.textColor=RGB(84, 84, 84);
@@ -186,21 +155,22 @@
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     if (scrollView==self.scrollView) {
         if(scrollView.contentOffset.x==0){
-//            NSLog(@"滑动到最左侧！");
+            //            NSLog(@"滑动到最左侧！");
             if (self.mLeftblock!=nil) {
                 self.mLeftblock(scrollView.contentOffset);
             }
         }
         CGFloat scrollViewWidth=scrollView.contentSize.width;
         CGFloat scrollViewOffestX=scrollView.contentOffset.x;
-        if (scrollViewWidth-scrollViewOffestX==self.frame.size.width-[self.mColumeMaxWidths[0] floatValue]) {
-//            NSLog(@"滑动到最右侧！");
+        if (scrollViewWidth-scrollViewOffestX==self.frame.size.width) {
+            //            NSLog(@"滑动到最右侧！");
             if (self.mRightblock!=nil) {
                 self.mRightblock(scrollView.contentOffset);
             }
         }
     }
 }
+
 
 #pragma mark 属性初始化
 -(void) setXTableDatas:(XTableDatas) xTableDatas{
@@ -233,10 +203,9 @@
     self.textFont=mTextFont();
 }
 -(void)setHeadScrollView:(HeadScrollView)mHeadScrollView{
+    self.mScollViews=[NSMutableArray arrayWithCapacity:10];
     self.mHeadScrollView=mHeadScrollView();
-    if (self.mScollViews!=nil) {
-        [self.mScollViews addObject:self.mHeadScrollView];
-    }
+    [self.mScollViews addObject:self.mHeadScrollView];
 }
 
 @end

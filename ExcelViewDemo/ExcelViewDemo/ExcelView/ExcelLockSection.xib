@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ExcelLockSection">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2H-4P-ycf">
+                    <rect key="frame" x="70" y="0.0" width="250" height="43"/>
+                </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Pb-gN-YpS">
+                    <rect key="frame" x="0.0" y="0.0" width="70" height="43"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="70" id="wSj-Yg-G1w"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="X2H-4P-ycf" firstAttribute="leading" secondItem="0Pb-gN-YpS" secondAttribute="trailing" id="IXV-rc-DaB"/>
+                <constraint firstAttribute="bottom" secondItem="X2H-4P-ycf" secondAttribute="bottom" id="NdO-C7-tKP"/>
+                <constraint firstItem="0Pb-gN-YpS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="WhE-zy-ePD"/>
+                <constraint firstAttribute="trailing" secondItem="X2H-4P-ycf" secondAttribute="trailing" id="YDj-x9-hW0"/>
+                <constraint firstItem="X2H-4P-ycf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="cg8-nw-LAb"/>
+                <constraint firstAttribute="bottom" secondItem="0Pb-gN-YpS" secondAttribute="bottom" id="gDF-Ar-uPj"/>
+                <constraint firstItem="0Pb-gN-YpS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kIZ-ax-aZ0"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="lockView" destination="0Pb-gN-YpS" id="ZTX-TI-DgV"/>
+                <outlet property="lockViewWidthConstraint" destination="wSj-Yg-G1w" id="j3v-6Q-wUr"/>
+                <outlet property="scrollView" destination="X2H-4P-ycf" id="PV7-o5-QZj"/>
+            </connections>
+            <point key="canvasLocation" x="-73" y="-273.5"/>
+        </view>
+    </objects>
+</document>

@@ -7,20 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA0C25881E937653000DDFA0 /* ExcelLockSection.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0C25871E937653000DDFA0 /* ExcelLockSection.m */; };
+		CA0C258A1E937668000DDFA0 /* ExcelLockSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA0C25891E937668000DDFA0 /* ExcelLockSection.xib */; };
+		CA0C258D1E937CC9000DDFA0 /* ExcelSection.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0C258C1E937CC9000DDFA0 /* ExcelSection.m */; };
+		CA0C258F1E937CD9000DDFA0 /* ExcelSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA0C258E1E937CD9000DDFA0 /* ExcelSection.xib */; };
+		CA0C25931E938195000DDFA0 /* ExcelLockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0C25911E938195000DDFA0 /* ExcelLockCell.m */; };
+		CA0C25941E938195000DDFA0 /* ExcelLockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA0C25921E938195000DDFA0 /* ExcelLockCell.xib */; };
+		CA0C259D1E9388C9000DDFA0 /* ExcelUnLockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0C259B1E9388C9000DDFA0 /* ExcelUnLockCell.m */; };
+		CA0C259E1E9388C9000DDFA0 /* ExcelUnLockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA0C259C1E9388C9000DDFA0 /* ExcelUnLockCell.xib */; };
+		CA0C25A21E93891D000DDFA0 /* LockViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0C25A01E93891D000DDFA0 /* LockViewCell.m */; };
+		CA0C25A31E93891D000DDFA0 /* LockViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA0C25A11E93891D000DDFA0 /* LockViewCell.xib */; };
+		CA0C25A71E93895E000DDFA0 /* ScrollViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA0C25A51E93895E000DDFA0 /* ScrollViewCell.m */; };
+		CA0C25A81E93895E000DDFA0 /* ScrollViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA0C25A61E93895E000DDFA0 /* ScrollViewCell.xib */; };
 		CA31469E1E4DAB2700EF4499 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA31469D1E4DAB2700EF4499 /* main.m */; };
 		CA3146A11E4DAB2700EF4499 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3146A01E4DAB2700EF4499 /* AppDelegate.m */; };
 		CA3146A41E4DAB2700EF4499 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3146A31E4DAB2700EF4499 /* ViewController.m */; };
 		CA3146A91E4DAB2700EF4499 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA3146A81E4DAB2700EF4499 /* Assets.xcassets */; };
 		CA3146B41E4DAC0D00EF4499 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA3146B31E4DAC0D00EF4499 /* ViewController.xib */; };
-		CA3146C01E4DAF0800EF4499 /* ExcelLockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3146B91E4DAF0800EF4499 /* ExcelLockCell.m */; };
-		CA3146C11E4DAF0800EF4499 /* ExcelLockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA3146BA1E4DAF0800EF4499 /* ExcelLockCell.xib */; };
 		CA3146C21E4DAF0800EF4499 /* ExcelView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3146BC1E4DAF0800EF4499 /* ExcelView.m */; };
-		CA3146C31E4DAF0800EF4499 /* ExcelViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3146BE1E4DAF0800EF4499 /* ExcelViewCell.m */; };
-		CA3146C41E4DAF0800EF4499 /* ExcelViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA3146BF1E4DAF0800EF4499 /* ExcelViewCell.xib */; };
 		CA571C0C1E5451D900D1253B /* UILabel+FitWitdhAndHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = CA571C0B1E5451D900D1253B /* UILabel+FitWitdhAndHeight.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA0C25861E937653000DDFA0 /* ExcelLockSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcelLockSection.h; sourceTree = "<group>"; };
+		CA0C25871E937653000DDFA0 /* ExcelLockSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcelLockSection.m; sourceTree = "<group>"; };
+		CA0C25891E937668000DDFA0 /* ExcelLockSection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcelLockSection.xib; sourceTree = "<group>"; };
+		CA0C258B1E937CC9000DDFA0 /* ExcelSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcelSection.h; sourceTree = "<group>"; };
+		CA0C258C1E937CC9000DDFA0 /* ExcelSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcelSection.m; sourceTree = "<group>"; };
+		CA0C258E1E937CD9000DDFA0 /* ExcelSection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcelSection.xib; sourceTree = "<group>"; };
+		CA0C25901E938195000DDFA0 /* ExcelLockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcelLockCell.h; sourceTree = "<group>"; };
+		CA0C25911E938195000DDFA0 /* ExcelLockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcelLockCell.m; sourceTree = "<group>"; };
+		CA0C25921E938195000DDFA0 /* ExcelLockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcelLockCell.xib; sourceTree = "<group>"; };
+		CA0C259A1E9388C9000DDFA0 /* ExcelUnLockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcelUnLockCell.h; sourceTree = "<group>"; };
+		CA0C259B1E9388C9000DDFA0 /* ExcelUnLockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcelUnLockCell.m; sourceTree = "<group>"; };
+		CA0C259C1E9388C9000DDFA0 /* ExcelUnLockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcelUnLockCell.xib; sourceTree = "<group>"; };
+		CA0C259F1E93891D000DDFA0 /* LockViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockViewCell.h; sourceTree = "<group>"; };
+		CA0C25A01E93891D000DDFA0 /* LockViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockViewCell.m; sourceTree = "<group>"; };
+		CA0C25A11E93891D000DDFA0 /* LockViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LockViewCell.xib; sourceTree = "<group>"; };
+		CA0C25A41E93895E000DDFA0 /* ScrollViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewCell.h; sourceTree = "<group>"; };
+		CA0C25A51E93895E000DDFA0 /* ScrollViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewCell.m; sourceTree = "<group>"; };
+		CA0C25A61E93895E000DDFA0 /* ScrollViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollViewCell.xib; sourceTree = "<group>"; };
 		CA3146991E4DAB2700EF4499 /* ExcelViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExcelViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA31469D1E4DAB2700EF4499 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CA31469F1E4DAB2700EF4499 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -31,14 +57,8 @@
 		CA3146AD1E4DAB2700EF4499 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA3146B31E4DAC0D00EF4499 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		CA3146B61E4DAE8B00EF4499 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		CA3146B81E4DAF0800EF4499 /* ExcelLockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcelLockCell.h; sourceTree = "<group>"; };
-		CA3146B91E4DAF0800EF4499 /* ExcelLockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcelLockCell.m; sourceTree = "<group>"; };
-		CA3146BA1E4DAF0800EF4499 /* ExcelLockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcelLockCell.xib; sourceTree = "<group>"; };
 		CA3146BB1E4DAF0800EF4499 /* ExcelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcelView.h; sourceTree = "<group>"; };
 		CA3146BC1E4DAF0800EF4499 /* ExcelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcelView.m; sourceTree = "<group>"; };
-		CA3146BD1E4DAF0800EF4499 /* ExcelViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcelViewCell.h; sourceTree = "<group>"; };
-		CA3146BE1E4DAF0800EF4499 /* ExcelViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcelViewCell.m; sourceTree = "<group>"; };
-		CA3146BF1E4DAF0800EF4499 /* ExcelViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcelViewCell.xib; sourceTree = "<group>"; };
 		CA571C0A1E5451D900D1253B /* UILabel+FitWitdhAndHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FitWitdhAndHeight.h"; sourceTree = "<group>"; };
 		CA571C0B1E5451D900D1253B /* UILabel+FitWitdhAndHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FitWitdhAndHeight.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,16 +118,28 @@
 		CA3146B71E4DAF0800EF4499 /* ExcelView */ = {
 			isa = PBXGroup;
 			children = (
-				CA3146B81E4DAF0800EF4499 /* ExcelLockCell.h */,
-				CA3146B91E4DAF0800EF4499 /* ExcelLockCell.m */,
-				CA3146BA1E4DAF0800EF4499 /* ExcelLockCell.xib */,
 				CA3146BB1E4DAF0800EF4499 /* ExcelView.h */,
 				CA3146BC1E4DAF0800EF4499 /* ExcelView.m */,
-				CA3146BD1E4DAF0800EF4499 /* ExcelViewCell.h */,
-				CA3146BE1E4DAF0800EF4499 /* ExcelViewCell.m */,
-				CA3146BF1E4DAF0800EF4499 /* ExcelViewCell.xib */,
 				CA571C0A1E5451D900D1253B /* UILabel+FitWitdhAndHeight.h */,
 				CA571C0B1E5451D900D1253B /* UILabel+FitWitdhAndHeight.m */,
+				CA0C25861E937653000DDFA0 /* ExcelLockSection.h */,
+				CA0C25871E937653000DDFA0 /* ExcelLockSection.m */,
+				CA0C25891E937668000DDFA0 /* ExcelLockSection.xib */,
+				CA0C258B1E937CC9000DDFA0 /* ExcelSection.h */,
+				CA0C258C1E937CC9000DDFA0 /* ExcelSection.m */,
+				CA0C258E1E937CD9000DDFA0 /* ExcelSection.xib */,
+				CA0C25901E938195000DDFA0 /* ExcelLockCell.h */,
+				CA0C25911E938195000DDFA0 /* ExcelLockCell.m */,
+				CA0C25921E938195000DDFA0 /* ExcelLockCell.xib */,
+				CA0C259A1E9388C9000DDFA0 /* ExcelUnLockCell.h */,
+				CA0C259B1E9388C9000DDFA0 /* ExcelUnLockCell.m */,
+				CA0C259C1E9388C9000DDFA0 /* ExcelUnLockCell.xib */,
+				CA0C259F1E93891D000DDFA0 /* LockViewCell.h */,
+				CA0C25A01E93891D000DDFA0 /* LockViewCell.m */,
+				CA0C25A11E93891D000DDFA0 /* LockViewCell.xib */,
+				CA0C25A41E93895E000DDFA0 /* ScrollViewCell.h */,
+				CA0C25A51E93895E000DDFA0 /* ScrollViewCell.m */,
+				CA0C25A61E93895E000DDFA0 /* ScrollViewCell.xib */,
 			);
 			path = ExcelView;
 			sourceTree = "<group>";
@@ -171,10 +203,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA3146C11E4DAF0800EF4499 /* ExcelLockCell.xib in Resources */,
+				CA0C25A31E93891D000DDFA0 /* LockViewCell.xib in Resources */,
 				CA3146B41E4DAC0D00EF4499 /* ViewController.xib in Resources */,
-				CA3146C41E4DAF0800EF4499 /* ExcelViewCell.xib in Resources */,
+				CA0C25941E938195000DDFA0 /* ExcelLockCell.xib in Resources */,
+				CA0C258A1E937668000DDFA0 /* ExcelLockSection.xib in Resources */,
+				CA0C259E1E9388C9000DDFA0 /* ExcelUnLockCell.xib in Resources */,
+				CA0C25A81E93895E000DDFA0 /* ScrollViewCell.xib in Resources */,
 				CA3146A91E4DAB2700EF4499 /* Assets.xcassets in Resources */,
+				CA0C258F1E937CD9000DDFA0 /* ExcelSection.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,13 +221,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA3146C01E4DAF0800EF4499 /* ExcelLockCell.m in Sources */,
 				CA3146A41E4DAB2700EF4499 /* ViewController.m in Sources */,
-				CA3146C31E4DAF0800EF4499 /* ExcelViewCell.m in Sources */,
+				CA0C25A71E93895E000DDFA0 /* ScrollViewCell.m in Sources */,
+				CA0C258D1E937CC9000DDFA0 /* ExcelSection.m in Sources */,
 				CA571C0C1E5451D900D1253B /* UILabel+FitWitdhAndHeight.m in Sources */,
+				CA0C25A21E93891D000DDFA0 /* LockViewCell.m in Sources */,
+				CA0C25881E937653000DDFA0 /* ExcelLockSection.m in Sources */,
+				CA0C25931E938195000DDFA0 /* ExcelLockCell.m in Sources */,
 				CA3146C21E4DAF0800EF4499 /* ExcelView.m in Sources */,
 				CA3146A11E4DAB2700EF4499 /* AppDelegate.m in Sources */,
 				CA31469E1E4DAB2700EF4499 /* main.m in Sources */,
+				CA0C259D1E9388C9000DDFA0 /* ExcelUnLockCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

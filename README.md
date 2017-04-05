@@ -29,6 +29,14 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 
   新增滚动视图监听Block，滑动到最左侧或者最右侧自定义处理事件，防止有部分滚动视图嵌套表格的需求
 
+* 更新时间2017年04月05日11:20:31  -----ExcelView V1.0.6   
+
+  版本重大BUG修改，数据过多时会引起异常奔溃
+
+  滚动时滚动视图数组不断增大从而引起遍历时间过长滚动缓慢问题（已重新设计方案）
+
+  列表先左移再上移会错行问题。
+
 
 
 
@@ -39,7 +47,21 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
     self.rightTableHeadArray=(NSMutableArray *)@[@"当日收入（万）",@"同比",@"环比",@"当月收入（万）",@"同比",@"环比",@"当年收入（万）",@"同比",@"环比"];
     self.excelDataArray=(NSMutableArray *)@[@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"]];
 
-    self.allTableDataArray=(NSMutableArray *)@[@[@"地区",@"当日收入（万）",@"同比",@"环比",@"当月收入（万）",@"同比",@"环比",@"当年收入（万）",@"同比",@"环比"],@[@"塔城",@"2.91111111111111111",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"哈密",@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"和田",@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"],@[@"阿勒泰",@"2.9",@"2%",@"3%",@"3.0",@"4%11111111111111111111",@"5%",@"18",@"4.5%",@"6.8%"],@[@"克州",@"2.9",@"2%",@"3%",@"3.0",@"4%",@"5%",@"18",@"4.5%",@"6.8%"]];
+    self.allTableDataArray=[NSMutableArray arrayWithCapacity:10];
+    NSMutableArray *fristDatas=[NSMutableArray arrayWithCapacity:10];
+    [fristDatas addObject:@"标题"];
+    for (int i=0; i<22; i++) {
+       [fristDatas addObject:[NSString stringWithFormat:@"标题%d",i]];
+    }
+    [self.allTableDataArray addObject:fristDatas];
+    for (int i=0; i<99; i++) {
+       NSMutableArray *rowDatas=[NSMutableArray arrayWithCapacity:10];
+       [rowDatas addObject:[NSString stringWithFormat:@"标题%d",i]];
+       for (int j=0; j<22;j++) {
+           [rowDatas addObject:[NSString stringWithFormat:@"数据%d",j]];
+       }
+       [self.allTableDataArray addObject:rowDatas];
+    }
 
     //代码方式添加
     ExcelView *excelView=[[ExcelView alloc]initWithFrame:CGRectMake(0, 280, UIScreenWidth, 270)];
