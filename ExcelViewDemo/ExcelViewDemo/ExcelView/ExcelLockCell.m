@@ -70,11 +70,17 @@
  初始化数据
  */
 -(void)initData{
-    self.mScollViews=[NSMutableArray arrayWithCapacity:10];
+    if(self.mScollViews!=nil){
+        [self.mScollViews removeAllObjects];
+    }else{
+        self.mScollViews=[NSMutableArray arrayWithCapacity:10];
+    }
     if (self.isLockFristRow) {
         [self.mRowMaxHeights removeObjectAtIndex:0];
         [self.mYTableDatas removeObjectAtIndex:0];
     }
+    self.mScrollViewContentWidth=0;
+    self.mScrollViewContentHeight=0;
     for (int i=0; i<self.mRowMaxHeights.count; i++) {
         self.mScrollViewContentHeight+=[self.mRowMaxHeights[i] floatValue];
     }
@@ -84,8 +90,8 @@
     //    NSLog(@"mRowMaxHeights:%@",self.mRowMaxHeights);
     //    NSLog(@"mYTableDatas:%@",self.mYTableDatas);
     //    NSLog(@"mXTableDatas%@",self.mXTableDatas);
-    //    NSLog(@"mScrollViewContentWidth:%f",self.mScrollViewContentWidth);
-    //    NSLog(@"mScrollViewContentHeight:%f",self.mScrollViewContentHeight);
+//        NSLog(@"mScrollViewContentWidth:%f",self.mScrollViewContentWidth);
+//        NSLog(@"mScrollViewContentHeight:%f",self.mScrollViewContentHeight);
     
 }
 
@@ -204,23 +210,43 @@
 
 #pragma mark 属性初始化
 -(void) setXTableDatas:(XTableDatas) xTableDatas{
-    self.mXTableDatas =[NSMutableArray arrayWithCapacity:10];
+    if (self.mXTableDatas!=nil) {
+        [self.mXTableDatas removeAllObjects];
+    }else{
+        self.mXTableDatas =[NSMutableArray arrayWithCapacity:10];
+    }
     [self.mXTableDatas addObjectsFromArray:xTableDatas()];
 }
 -(void)setYTableDatas:(YTableDatas)yTableDatas{
-    self.mYTableDatas =[NSMutableArray arrayWithCapacity:10];
+    if (self.mYTableDatas!=nil) {
+        [self.mYTableDatas removeAllObjects];
+    }else{
+        self.mYTableDatas =[NSMutableArray arrayWithCapacity:10];
+    }
     [self.mYTableDatas addObjectsFromArray:yTableDatas()];
 }
 -(void)setColumeMaxWidths:(ColumeMaxWidths)mColumeMaxWidths{
-    self.mColumeMaxWidths =[NSMutableArray arrayWithCapacity:10];
+    if (self.mColumeMaxWidths!=nil) {
+        [self.mColumeMaxWidths removeAllObjects];
+    }else{
+        self.mColumeMaxWidths =[NSMutableArray arrayWithCapacity:10];
+    }
     [self.mColumeMaxWidths addObjectsFromArray:mColumeMaxWidths()];
 }
 -(void)setRowMaxHeights:(RowMaxHeights)mRowMaxHeights{
-    self.mRowMaxHeights =[NSMutableArray arrayWithCapacity:10];
+    if (self.mRowMaxHeights!=nil) {
+        [self.mRowMaxHeights removeAllObjects];
+    }else{
+        self.mRowMaxHeights =[NSMutableArray arrayWithCapacity:10];
+    }
     [self.mRowMaxHeights addObjectsFromArray:mRowMaxHeights()];
 }
 -(void)setFristRowDatas:(FristRowDatas)mFristRowDatas{
-    self.mFristRowDatas =[NSMutableArray arrayWithCapacity:10];
+    if (self.mFristRowDatas!=nil) {
+        [self.mFristRowDatas removeAllObjects];
+    }else{
+        self.mFristRowDatas =[NSMutableArray arrayWithCapacity:10];
+    }
     [self.mFristRowDatas addObjectsFromArray:mFristRowDatas()];
 }
 -(void)setIsLockFristRowBolck:(IsLockFristRow)isLockFristRow{

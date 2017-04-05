@@ -63,8 +63,6 @@
     self.mTableView.tableFooterView=[UIView new];
     self.mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.mTableView.showsVerticalScrollIndicator=NO;
-    [self.mTableView registerNib:[UINib nibWithNibName:@"ExcelUnLockCell" bundle:nil] forCellReuseIdentifier:@"ExcelUnLockCell"];
-    [self.mTableView registerNib:[UINib nibWithNibName:@"ExcelLockCell" bundle:nil] forCellReuseIdentifier:@"ExcelLockCell"];
     self.mXTableDatas=[NSMutableArray arrayWithCapacity:10];
     self.mYTableDatas=[NSMutableArray arrayWithCapacity:10];
     self.mFristRowDatas=[NSMutableArray arrayWithCapacity:10];
@@ -314,10 +312,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_isLockFristColumn) {
         self.mLockViewWidth=[self.mColumeMaxWidths[0] floatValue];
-        ExcelLockCell *cell=(ExcelLockCell *)[tableView dequeueReusableCellWithIdentifier:@"ExcelLockCell"];
-        if (!cell) {
-            cell=(ExcelLockCell *)[[[NSBundle mainBundle]loadNibNamed:@"ExcelLockCell" owner:nil options:nil]lastObject];
-        }
+        ExcelLockCell *cell=(ExcelLockCell *)[[[NSBundle mainBundle]loadNibNamed:@"ExcelLockCell" owner:nil options:nil]lastObject];
         //需求通过Block设值,因为第一层先绘制
         [cell setXTableDatas:^NSMutableArray *{
             return self.mXTableDatas;
@@ -356,10 +351,7 @@
         [self.mScrollViewArray addObject:cell.scrollView];
         return cell;
     }else{
-        ExcelUnLockCell *cell=(ExcelUnLockCell *)[tableView dequeueReusableCellWithIdentifier:@"ExcelUnLockCell"];
-        if (!cell) {
-            cell=(ExcelUnLockCell *)[[[NSBundle mainBundle]loadNibNamed:@"ExcelUnLockCell" owner:nil options:nil]lastObject];
-        }
+        ExcelUnLockCell *cell=(ExcelUnLockCell *)[[[NSBundle mainBundle]loadNibNamed:@"ExcelUnLockCell" owner:nil options:nil]lastObject];
         //需求通过Block设值,因为第一层先绘制
         [cell setXTableDatas:^NSMutableArray *{
             return self.mXTableDatas;
