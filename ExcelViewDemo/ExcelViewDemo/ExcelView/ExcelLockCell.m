@@ -232,7 +232,7 @@
 -(void)setLockTextFontBolck:(LockTextFont)mTextFont{
     self.textFont=mTextFont();
 }
--(void)setHeadScrollView:(HeadScrollView)mHeadScrollView{
+-(void)setHeadScrollView:(HeadScrollViewBolck)mHeadScrollView{
     self.mHeadScrollView=mHeadScrollView();
     if (self.mScollViews!=nil) {
         [self.mScollViews addObject:self.mHeadScrollView];

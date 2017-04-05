@@ -202,7 +202,7 @@
 -(void)setLockTextFontBolck:(LockTextFont)mTextFont{
     self.textFont=mTextFont();
 }
--(void)setHeadScrollView:(HeadScrollView)mHeadScrollView{
+-(void)setHeadScrollView:(HeadScrollViewBolck)mHeadScrollView{
     self.mScollViews=[NSMutableArray arrayWithCapacity:10];
     self.mHeadScrollView=mHeadScrollView();
     [self.mScollViews addObject:self.mHeadScrollView];

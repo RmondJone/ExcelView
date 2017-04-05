@@ -15,7 +15,7 @@ typedef NSMutableArray *(^RowMaxHeights) ();
 typedef BOOL (^IsLockFristRow) ();
 typedef UIColor *(^FristRowBackGround) ();
 typedef UIFont *(^LockTextFont) ();
-typedef UIScrollView *(^HeadScrollView)();
+typedef UIScrollView *(^HeadScrollViewBolck)();
 /**
  滚动视图滑动到最左侧的Block
  */
@@ -45,7 +45,7 @@ typedef void(^ScrollViewToRightBlock)(CGPoint contentOffset);
 -(void) setIsLockFristRowBolck:(IsLockFristRow) isLockFristRow;
 -(void) setFristRowBackGroundBolck:(FristRowBackGround) mFristRowBackGround;
 -(void) setLockTextFontBolck:(LockTextFont) mTextFont;
--(void) setHeadScrollView:(HeadScrollView) mHeadScrollView;
+-(void) setHeadScrollView:(HeadScrollViewBolck) mHeadScrollView;
 -(void)initView;
 -(void)initViewWithScrollViewLeftBolck:(ScrollViewToLeftBlock) leftblock AndScrollViewRightBolck:(ScrollViewToRightBlock) rightblock;
 @end
