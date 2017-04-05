@@ -63,7 +63,7 @@
     self.mTableView.tableFooterView=[UIView new];
     self.mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.mTableView.showsVerticalScrollIndicator=NO;
-    [self.mTableView registerNib:[UINib nibWithNibName:@"ExcelViewCell" bundle:nil] forCellReuseIdentifier:@"ExcelViewCell"];
+    [self.mTableView registerNib:[UINib nibWithNibName:@"ExcelUnLockCell" bundle:nil] forCellReuseIdentifier:@"ExcelUnLockCell"];
     [self.mTableView registerNib:[UINib nibWithNibName:@"ExcelLockCell" bundle:nil] forCellReuseIdentifier:@"ExcelLockCell"];
     self.mXTableDatas=[NSMutableArray arrayWithCapacity:10];
     self.mYTableDatas=[NSMutableArray arrayWithCapacity:10];
@@ -314,7 +314,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_isLockFristColumn) {
         self.mLockViewWidth=[self.mColumeMaxWidths[0] floatValue];
-        ExcelLockCell *cell=[tableView dequeueReusableCellWithIdentifier:@"ExcelLockCell"];
+        ExcelLockCell *cell=(ExcelLockCell *)[tableView dequeueReusableCellWithIdentifier:@"ExcelLockCell"];
         if (!cell) {
             cell=(ExcelLockCell *)[[[NSBundle mainBundle]loadNibNamed:@"ExcelLockCell" owner:nil options:nil]lastObject];
         }
@@ -356,7 +356,7 @@
         [self.mScrollViewArray addObject:cell.scrollView];
         return cell;
     }else{
-        ExcelUnLockCell *cell=[tableView dequeueReusableCellWithIdentifier:@"ExcelUnLockCell"];
+        ExcelUnLockCell *cell=(ExcelUnLockCell *)[tableView dequeueReusableCellWithIdentifier:@"ExcelUnLockCell"];
         if (!cell) {
             cell=(ExcelUnLockCell *)[[[NSBundle mainBundle]loadNibNamed:@"ExcelUnLockCell" owner:nil options:nil]lastObject];
         }

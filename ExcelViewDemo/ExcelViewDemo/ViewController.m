@@ -33,7 +33,7 @@
         [fristDatas addObject:[NSString stringWithFormat:@"标题%d",i]];
     }
     [self.allTableDataArray addObject:fristDatas];
-    for (int i=0; i<99; i++) {
+    for (int i=0; i<322; i++) {
         NSMutableArray *rowDatas=[NSMutableArray arrayWithCapacity:10];
         [rowDatas addObject:[NSString stringWithFormat:@"标题%d",i]];
         for (int j=0; j<22;j++) {
@@ -45,7 +45,7 @@
 //    NSLog(@"%@",self.allTableDataArray);
     
 //    //代码方式添加
-//    ExcelView *excelView=[[ExcelView alloc]initWithFrame:CGRectMake(0, 280, UIScreenWidth, 270)];
+//    ExcelView *excelView=[[ExcelView alloc]initWithFrame:CGRectMake(0, 64, UIScreenWidth, UIScreenHeight)];
 //    excelView.topTableHeadDatas=self.rightTableHeadArray;
 //    excelView.leftTabHeadDatas=self.leftTableDataArray;
 //    excelView.tableDatas=self.excelDataArray;
