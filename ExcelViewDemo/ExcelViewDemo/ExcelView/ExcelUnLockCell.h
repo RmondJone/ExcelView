@@ -26,7 +26,7 @@ typedef void (^ScrollViewToLeftBlock)(CGPoint contentOffset);
 typedef void(^ScrollViewToRightBlock)(CGPoint contentOffset);
 @interface ExcelUnLockCell : UITableViewCell<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UITableView *scrollViewTableView;
+@property (retain, nonatomic) UITableView *scrollViewTableView;
 /**
  滚动视图滑动到最左侧的Block
  */

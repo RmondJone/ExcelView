@@ -28,7 +28,9 @@ typedef void(^ScrollViewToRightBlock)(CGPoint contentOffset);
 
 @property (weak, nonatomic) IBOutlet UITableView *lockViewTableView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UITableView *scrollViewTableView;
+@property (retain, nonatomic) UITableView *scrollViewTableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fristColumnWidth;
+
 /**
  滚动视图滑动到最左侧的Block
  */

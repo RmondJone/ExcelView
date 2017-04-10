@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,22 +18,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="201"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" id="uSp-pK-yT5">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="201"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="wi3-EX-KLd">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="201"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSp-pK-yT5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                     </scrollView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="uSp-pK-yT5" secondAttribute="trailing" id="Etk-PK-JPT"/>
+                    <constraint firstAttribute="bottom" secondItem="uSp-pK-yT5" secondAttribute="bottom" id="Gxj-aR-2y5"/>
+                    <constraint firstItem="uSp-pK-yT5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Rpy-Bg-nks"/>
+                    <constraint firstItem="uSp-pK-yT5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="icQ-i4-8ki"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="scrollView" destination="uSp-pK-yT5" id="2hG-mY-ibJ"/>
-                <outlet property="scrollViewTableView" destination="wi3-EX-KLd" id="Mxl-Qh-d7C"/>
             </connections>
             <point key="canvasLocation" x="-93" y="-119.5"/>
         </tableViewCell>

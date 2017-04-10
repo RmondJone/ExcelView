@@ -50,7 +50,7 @@
 //    excelView.leftTabHeadDatas=self.leftTableDataArray;
 //    excelView.tableDatas=self.excelDataArray;
 //    excelView.isLockFristColumn=NO;
-//    excelView.isLockFristRow=NO;
+//    excelView.isLockFristRow=YES;
 //    excelView.isColumnTitlte=YES;
 //    excelView.columnTitlte=@"地区";
 //    [excelView show];

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,33 +15,36 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="189"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="188"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="189"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="cX1-Oa-zd5">
-                        <rect key="frame" x="0.0" y="0.0" width="70" height="189"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cX1-Oa-zd5">
+                        <rect key="frame" x="0.0" y="0.0" width="70" height="188"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="6kW-Aq-QSh"/>
+                        </constraints>
                     </tableView>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" id="WZQ-dB-wSK">
-                        <rect key="frame" x="70" y="0.0" width="250" height="189"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="UrH-GU-5fc">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="189"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                        </subviews>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WZQ-dB-wSK">
+                        <rect key="frame" x="70" y="0.0" width="250" height="188"/>
                     </scrollView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="cX1-Oa-zd5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1Al-vS-mYS"/>
+                    <constraint firstAttribute="bottom" secondItem="WZQ-dB-wSK" secondAttribute="bottom" id="FO8-h2-TU3"/>
+                    <constraint firstAttribute="trailing" secondItem="WZQ-dB-wSK" secondAttribute="trailing" id="JED-6V-Epg"/>
+                    <constraint firstAttribute="bottom" secondItem="cX1-Oa-zd5" secondAttribute="bottom" id="WBc-GT-ba0"/>
+                    <constraint firstItem="WZQ-dB-wSK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Wc5-SI-CBX"/>
+                    <constraint firstItem="WZQ-dB-wSK" firstAttribute="leading" secondItem="cX1-Oa-zd5" secondAttribute="trailing" id="xX3-cs-r0o"/>
+                    <constraint firstItem="cX1-Oa-zd5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="zVX-8l-J36"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="fristColumnWidth" destination="6kW-Aq-QSh" id="m5s-73-YbI"/>
                 <outlet property="lockViewTableView" destination="cX1-Oa-zd5" id="ums-pc-yGW"/>
                 <outlet property="scrollView" destination="WZQ-dB-wSK" id="DXZ-gT-Rta"/>
-                <outlet property="scrollViewTableView" destination="UrH-GU-5fc" id="Np5-sW-kA3"/>
             </connections>
-            <point key="canvasLocation" x="-551" y="-58.5"/>
+            <point key="canvasLocation" x="-972" y="-418"/>
         </tableViewCell>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

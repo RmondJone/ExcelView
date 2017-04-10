@@ -47,12 +47,13 @@
 -(void) initView{
     [self initData];
     //重设视图
-    self.lockViewTableView.frame=CGRectMake(0, 0, [self.mColumeMaxWidths[0] floatValue],_mScrollViewContentHeight);
-    self.scrollView.frame=CGRectMake([self.mColumeMaxWidths[0] floatValue], 0, self.frame.size.width-[self.mColumeMaxWidths[0] floatValue], _mScrollViewContentHeight);
+    self.fristColumnWidth.constant=[self.mColumeMaxWidths[0] floatValue];
+    self.scrollViewTableView=[[UITableView alloc]init];
     self.scrollViewTableView.frame=CGRectMake(0, 0, _mScrollViewContentWidth, _mScrollViewContentHeight);
     self.scrollView.contentSize=CGSizeMake(self.mScrollViewContentWidth, self.mScrollViewContentHeight);
     self.scrollView.bounces=NO;
     self.scrollView.delegate=self;
+    [self.scrollView addSubview:self.self.scrollViewTableView];
     [self.mScollViews addObject:self.scrollView];
     //初始化tableView
     self.lockViewTableView.separatorStyle=UITableViewCellSeparatorStyleNone;

@@ -46,17 +46,19 @@
  */
 -(void) initView{
     [self initData];
-    self.scrollView.frame=CGRectMake(0, 0, self.frame.size.width,self.mScrollViewContentHeight);
-    self.scrollView.contentSize=CGSizeMake(self.mScrollViewContentWidth, self.mScrollViewContentHeight);
-    self.scrollView.bounces=NO;
-    self.scrollView.delegate=self;
-    [self.mScollViews addObject:self.scrollView];
+    self.scrollViewTableView=[[UITableView alloc]init];
     self.scrollViewTableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self.scrollViewTableView registerNib:[UINib nibWithNibName:@"ScrollViewCell" bundle:nil] forCellReuseIdentifier:@"ScrollViewCell"];
     self.scrollViewTableView.frame=CGRectMake(0, 0, self.mScrollViewContentWidth, self.mScrollViewContentHeight);
     self.scrollViewTableView.scrollEnabled=NO;
     self.scrollViewTableView.delegate=self;
     self.scrollViewTableView.dataSource=self;
+    
+    self.scrollView.contentSize=CGSizeMake(self.mScrollViewContentWidth, self.mScrollViewContentHeight);
+    self.scrollView.bounces=NO;
+    self.scrollView.delegate=self;
+    [self.scrollView addSubview:self.scrollViewTableView];
+    [self.mScollViews addObject:self.scrollView];
 }
 /**
  初始化数据
