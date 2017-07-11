@@ -33,7 +33,7 @@
         [fristDatas addObject:[NSString stringWithFormat:@"标题%d",i]];
     }
     [self.allTableDataArray addObject:fristDatas];
-    for (int i=0; i<99; i++) {
+    for (int i=0; i<22; i++) {
         NSMutableArray *rowDatas=[NSMutableArray arrayWithCapacity:10];
         [rowDatas addObject:[NSString stringWithFormat:@"标题%d",i]];
         for (int j=0; j<22;j++) {

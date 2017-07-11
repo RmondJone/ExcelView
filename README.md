@@ -3,7 +3,7 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 
 ## 效果展示
 
-![image](https://github.com/RmondJone/ExcelView/blob/master/show.gif)
+![image](https://github.com/RmondJone/ExcelView/blob/master/GIF.gif)
 
 ## 更新日志
 
@@ -49,7 +49,7 @@ IOS表格自定义视图，支持XIB布局，支持代码布局，支持锁双�
 
 * 更新时间2017年07月11日13:07:59  -----ExcelView V1.0.9  
 
-  表格BUG修改，但表格滑动到最右侧时偶尔不触发监听事件修改
+  表格BUG修改，当表格滑动到最右侧时偶尔不触发监听事件修改
 
 ## API使用说明
 
