@@ -9,6 +9,7 @@
 #import "ExcelLockCell.h"
 #import "LockViewCell.h"
 #import "ScrollViewCell.h"
+#include <math.h>
 @interface ExcelLockCell()
 @property(nonatomic,retain) NSMutableArray *mXTableDatas;//横向单行数据列表
 @property(nonatomic,retain) NSMutableArray *mYTableDatas;//如果锁定第一列则设置第一列数据集合
@@ -200,7 +201,7 @@
         }
         CGFloat scrollViewWidth=scrollView.contentSize.width;
         CGFloat scrollViewOffestX=scrollView.contentOffset.x;
-        if (scrollViewWidth-scrollViewOffestX==self.frame.size.width-[self.mColumeMaxWidths[0] floatValue]) {
+        if (floor(scrollViewWidth-scrollViewOffestX)==floor(self.frame.size.width-[self.mColumeMaxWidths[0] floatValue])) {
 //            NSLog(@"滑动到最右侧！");
             if (self.mRightblock!=nil) {
                 self.mRightblock(scrollView.contentOffset);
