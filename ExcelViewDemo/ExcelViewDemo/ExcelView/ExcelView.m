@@ -64,6 +64,7 @@
     self.mTableView.tableFooterView=[UIView new];
     self.mTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.mTableView.showsVerticalScrollIndicator=NO;
+
     self.mXTableDatas=[NSMutableArray arrayWithCapacity:10];
     self.mYTableDatas=[NSMutableArray arrayWithCapacity:10];
     self.mFristRowDatas=[NSMutableArray arrayWithCapacity:10];
@@ -79,6 +80,17 @@
     self.columnMinWidth=70;
     self.mLockViewWidth=0;
     [self addSubview:self.mTableView];
+    
+    //添加约束，防止横屏时不能填充整个屏幕
+    self.mTableView.translatesAutoresizingMaskIntoConstraints=NO;
+    NSLayoutConstraint *mConstraintTop=[NSLayoutConstraint constraintWithItem:self.mTableView attribute:NSLayoutAttributeTop relatedBy:0 toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+    NSLayoutConstraint *mConstraintLeft=[NSLayoutConstraint constraintWithItem:self.mTableView attribute:NSLayoutAttributeLeft relatedBy:0 toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
+    NSLayoutConstraint *mConstraintRight=[NSLayoutConstraint constraintWithItem:self.mTableView attribute:NSLayoutAttributeRight relatedBy:0 toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0];
+    NSLayoutConstraint *mConstraintBottom=[NSLayoutConstraint constraintWithItem:self.mTableView attribute:NSLayoutAttributeBottom relatedBy:0 toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+    [self addConstraint:mConstraintTop];
+    [self addConstraint:mConstraintLeft];
+    [self addConstraint:mConstraintRight];
+    [self addConstraint:mConstraintBottom];
  }
 
 /**
